@@ -239,6 +239,190 @@
   }
 }
 
+/* Product Page Styles */
+.property-detail {
+  padding: 2rem 0;
+}
+
+.property-header {
+  margin-bottom: 2rem;
+}
+
+.breadcrumb {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+}
+
+.breadcrumb a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.property-title {
+  font-size: 2.5rem;
+  color: var(--color-dark-blue);
+  margin-bottom: 0.5rem;
+}
+
+.property-location {
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+  margin-bottom: 1rem;
+}
+
+.property-price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 2rem;
+}
+
+/* Gallery Styles */
+.property-gallery {
+  margin-bottom: 3rem;
+}
+
+.main-image {
+  margin-bottom: 1rem;
+}
+
+.main-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.gallery-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.5rem;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.thumbnail:hover,
+.thumbnail.active {
+  border-color: var(--color-primary);
+}
+
+/* Specifications Styles */
+.property-specs {
+  margin-bottom: 3rem;
+}
+
+.property-specs h2 {
+  margin-bottom: 1.5rem;
+  color: var(--color-dark-blue);
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.spec-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--color-background-light);
+  border-radius: 8px;
+}
+
+.spec-icon {
+  font-size: 1.5rem;
+}
+
+.spec-label {
+  font-weight: 500;
+  color: var(--color-text-dark);
+}
+
+.spec-value {
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-left: auto;
+}
+
+/* Description Styles */
+.property-description {
+  margin-bottom: 3rem;
+}
+
+.property-description h2 {
+  margin-bottom: 1rem;
+  color: var(--color-dark-blue);
+}
+
+.description-content {
+  line-height: 1.6;
+  color: var(--color-text-dark);
+}
+
+/* Action Buttons */
+.property-actions {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: var(--color-background-light);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.property-actions h2 {
+  margin-bottom: 1.5rem;
+  color: var(--color-dark-blue);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn--whatsapp {
+  background-color: #25D366;
+  color: white;
+}
+
+.btn--whatsapp:hover {
+  background-color: #128C7E;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .property-title {
+    font-size: 2rem;
+  }
+
+  .property-price {
+    font-size: 1.5rem;
+  }
+
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .gallery-thumbnails {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* Benefits Section */
 .benefits {
   padding: var(--spacing-xl) 0;

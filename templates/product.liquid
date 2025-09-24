@@ -1,566 +1,151 @@
-{% comment %}
-  Property Detail Page Template
-  Displays comprehensive property information with image gallery
-{% endcomment %}
-
-<article class="property-detail" itemscope itemtype="https://schema.org/RealEstateAgent">
+<div class="property-detail">
   <div class="container">
     <!-- Property Header -->
-    <header class="property-header">
+    <div class="property-header">
       <nav class="breadcrumb">
-        <a href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a>
-        <span class="breadcrumb-separator">/</span>
-        <a href="{{ collections.propiedades.url }}">{{ 'general.breadcrumb.properties' | t }}</a>
-        <span class="breadcrumb-separator">/</span>
-        <span class="breadcrumb-current">{{ product.title }}</span>
+        <a href="{{ routes.root_url }}">Inicio</a>
+        <span>/</span>
+        <a href="/collections/propiedades">Propiedades</a>
+        <span>/</span>
+        <span>{{ product.title }}</span>
       </nav>
       
-      <h1 class="property-title" itemprop="name">{{ product.title }}</h1>
+      <h1 class="property-title">{{ product.title }}</h1>
       
       {% if product.metafields.custom.location %}
-        <p class="property-location" itemprop="address">
-          <svg class="location-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-          </svg>
-          {{ product.metafields.custom.location }}
+        <p class="property-location">
+          📍 {{ product.metafields.custom.location }}
         </p>
       {% endif %}
       
-      <div class="property-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-        <span class="price-amount" itemprop="price" content="{{ product.price | divided_by: 100.0 }}">
-          {{ product.price | money }}
-        </span>
-        <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
-        <meta itemprop="availability" content="https://schema.org/InStock">
+      <div class="property-price">
+        <span class="price-amount">{{ product.price | money }}</span>
       </div>
-    </header>
-
-    <div class="property-content">
-      <!-- Image Gallery Section -->
-      <section class="property-gallery">
-        <div class="gallery-main">
-          {% if product.images.size > 0 %}
-            <div class="main-image-container">
-              <img 
-                src="{{ product.featured_image | img_url: '800x600' }}" 
-                alt="{% if product.featured_image.alt != blank %}{{ product.featured_image.alt }}{% else %}{{ product.title }} - Vista principal{% if product.metafields.custom.property_type %} de {{ product.metafields.custom.property_type }}{% endif %}{% if product.metafields.custom.location %} en {{ product.metafields.custom.location }}{% endif %}{% endif %}"
-                class="main-image"
-                id="mainImage"
-                itemprop="image"
-                width="800"
-                height="600"
-              >
-              <button class="lightbox-trigger" data-image-index="0" aria-label="{{ 'product.gallery.view_full' | t }}">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M9 11H7v6h6v-2H9v-4zm-2 8c-1.1 0-2-.9-2-2V9c0-1.1.9-2 2-2h2V5c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v6c0 1.1-.9 2-2 2h-2v2c0 1.1-.9 2-2 2H7z"/>
-                </svg>
-              </button>
-            </div>
-            
-            {% if product.images.size > 1 %}
-              <div class="gallery-thumbnails">
-                {% for image in product.images limit: 6 %}
-                  <button 
-                    class="thumbnail{% if forloop.first %} active{% endif %}"
-                    data-image-src="{{ image | img_url: '800x600' }}"
-                    data-image-index="{{ forloop.index0 }}"
-                    aria-label="{{ 'product.gallery.view_image' | t }} {{ forloop.index }}"
-                  >
-                    <img src="{{ image | img_url: '120x90' }}" alt="{% if image.alt != blank %}{{ image.alt }}{% else %}{{ product.title }} - Imagen {{ forloop.index }}{% if product.metafields.custom.property_type %} de {{ product.metafields.custom.property_type }}{% endif %}{% endif %}" width="120" height="90">
-                  </button>
-                {% endfor %}
-                
-                {% if product.images.size > 6 %}
-                  <button class="thumbnail-more" data-image-index="6">
-                    <span class="more-count">+{{ product.images.size | minus: 6 }}</span>
-                  </button>
-                {% endif %}
-              </div>
-            {% endif %}
-          {% else %}
-            <div class="no-image">
-              <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-              </svg>
-              <p>{{ 'product.gallery.no_image' | t }}</p>
-            </div>
-          {% endif %}
-        </div>
-      </section>
-
-      <!-- Property Information Section -->
-      <section class="property-info">
-        <div class="property-specs">
-          <h2>{{ 'product.details.specifications' | t }}</h2>
-          
-          <div class="specs-grid">
-            {% if product.metafields.custom.bedrooms %}
-              <div class="spec-item" itemprop="numberOfRooms">
-                <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM19 7h-8v7H3V6H1v11h2v3h2v-3h2v3h2v-3h4v3h2v-3h2v3h2v-3h2V7z"/>
-                </svg>
-                <span class="spec-label">{{ 'product.details.bedrooms' | t }}</span>
-                <span class="spec-value">{{ product.metafields.custom.bedrooms }}</span>
-              </div>
-            {% endif %}
-            
-            {% if product.metafields.custom.bathrooms %}
-              <div class="spec-item">
-                <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M9 2v1h6V2h2v1h1c1.1 0 2 .9 2 2v1H4V5c0-1.1.9-2 2-2h1V2h2zM4 7h16v10c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V7z"/>
-                </svg>
-                <span class="spec-label">{{ 'product.details.bathrooms' | t }}</span>
-                <span class="spec-value">
-                  {{ product.metafields.custom.bathrooms }}
-                  {% if product.metafields.custom.half_bathrooms and product.metafields.custom.half_bathrooms > 0 %}
-                    + {{ product.metafields.custom.half_bathrooms }} medio{% if product.metafields.custom.half_bathrooms > 1 %}s{% endif %}
-                  {% endif %}
-                </span>
-              </div>
-            {% endif %}
-            
-            {% if product.metafields.custom.square_meters %}
-              <div class="spec-item" itemprop="floorSize">
-                <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 19V5h14v14H5z"/>
-                </svg>
-                <span class="spec-label">{{ 'product.details.area' | t }}</span>
-                <span class="spec-value">{{ product.metafields.custom.square_meters }} m²</span>
-              </div>
-            {% endif %}
-            
-            {% if product.metafields.custom.lot_size %}
-              <div class="spec-item">
-                <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 19V5h14v14H5z"/>
-                </svg>
-                <span class="spec-label">{{ 'product.details.lot_size' | t }}</span>
-                <span class="spec-value">{{ product.metafields.custom.lot_size }} m²</span>
-              </div>
-            {% endif %}
-            
-            {% if product.metafields.custom.property_type %}
-              <div class="spec-item">
-                <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                </svg>
-                <span class="spec-label">{{ 'product.details.type' | t }}</span>
-                <span class="spec-value">
-                  {% case product.metafields.custom.property_type %}
-                    {% when 'casa' %}Casa
-                    {% when 'departamento' %}Departamento
-                    {% when 'terreno' %}Terreno
-                    {% when 'local_comercial' %}Local Comercial
-                    {% when 'oficina' %}Oficina
-                    {% when 'bodega' %}Bodega
-                    {% else %}{{ product.metafields.custom.property_type | capitalize }}
-                  {% endcase %}
-                </span>
-              </div>
-            {% endif %}
-            
-            {% if product.metafields.custom.parking_spaces %}
-              <div class="spec-item">
-                <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M6 13c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm12-6c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm-7-15h2v3h-2V4zm0 15h2v3h-2v-3z"/>
-                </svg>
-                <span class="spec-label">{{ 'product.details.parking' | t }}</span>
-                <span class="spec-value">{{ product.metafields.custom.parking_spaces }} espacio{% if product.metafields.custom.parking_spaces != 1 %}s{% endif %}</span>
-              </div>
-            {% endif %}
-            
-            {% if product.metafields.custom.year_built %}
-              <div class="spec-item">
-                <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
-                </svg>
-                <span class="spec-label">{{ 'product.details.year_built' | t }}</span>
-                <span class="spec-value">{{ product.metafields.custom.year_built }}</span>
-              </div>
-            {% endif %}
-          </div>
-        </div>
-
-        <!-- Additional Property Information -->
-        {% if product.metafields.custom.neighborhood or product.metafields.custom.city or product.metafields.custom.state %}
-          <div class="property-location-details">
-            <h3>{{ 'product.details.location_details' | t }}</h3>
-            <div class="location-info">
-              {% if product.metafields.custom.neighborhood %}
-                <p><strong>{{ 'product.details.neighborhood' | t }}:</strong> {{ product.metafields.custom.neighborhood }}</p>
-              {% endif %}
-              {% if product.metafields.custom.city %}
-                <p><strong>{{ 'product.details.city' | t }}:</strong> {{ product.metafields.custom.city }}</p>
-              {% endif %}
-              {% if product.metafields.custom.state %}
-                <p><strong>{{ 'product.details.state' | t }}:</strong> {{ product.metafields.custom.state }}</p>
-              {% endif %}
-              {% if product.metafields.custom.postal_code %}
-                <p><strong>{{ 'product.details.postal_code' | t }}:</strong> {{ product.metafields.custom.postal_code }}</p>
-              {% endif %}
-            </div>
-          </div>
-        {% endif %}
-
-        <!-- Financial Information -->
-        {% if product.metafields.custom.maintenance_fee or product.metafields.custom.property_tax %}
-          <div class="property-financial">
-            <h3>{{ 'product.details.financial_info' | t }}</h3>
-            <div class="financial-info">
-              {% if product.metafields.custom.maintenance_fee %}
-                <p><strong>{{ 'product.details.maintenance_fee' | t }}:</strong> {{ product.metafields.custom.maintenance_fee | money }} {{ 'product.details.monthly' | t }}</p>
-              {% endif %}
-              {% if product.metafields.custom.property_tax %}
-                <p><strong>{{ 'product.details.property_tax' | t }}:</strong> {{ product.metafields.custom.property_tax | money }} {{ 'product.details.annually' | t }}</p>
-              {% endif %}
-            </div>
-          </div>
-        {% endif %}
-
-        <!-- Property Description -->
-        {% if product.description != blank %}
-          <div class="property-description">
-            <h2>{{ 'product.details.description' | t }}</h2>
-            <div class="description-content" itemprop="description">
-              {{ product.description }}
-            </div>
-          </div>
-        {% endif %}
-
-        <!-- Property Features -->
-        {% if product.metafields.custom.features %}
-          <div class="property-features">
-            <h2>{{ 'product.details.features' | t }}</h2>
-            <ul class="features-list">
-              {% assign features = product.metafields.custom.features | split: ',' %}
-              {% for feature in features %}
-                <li class="feature-item">
-                  <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                  </svg>
-                  {{ feature | strip }}
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        {% endif %}
-
-        <!-- Property Amenities -->
-        {% if product.metafields.custom.amenities %}
-          <div class="property-amenities">
-            <h2>{{ 'product.details.amenities' | t }}</h2>
-            <ul class="amenities-list">
-              {% assign amenities = product.metafields.custom.amenities | split: ',' %}
-              {% for amenity in amenities %}
-                <li class="amenity-item">
-                  <svg class="amenity-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                  </svg>
-                  {{ amenity | strip }}
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        {% endif %}
-
-        <!-- Virtual Tour and Video -->
-        {% if product.metafields.custom.virtual_tour_url or product.metafields.custom.video_url %}
-          <div class="property-media">
-            <h2>{{ 'product.details.media' | t }}</h2>
-            <div class="media-buttons">
-              {% if product.metafields.custom.virtual_tour_url %}
-                <a href="{{ product.metafields.custom.virtual_tour_url }}" target="_blank" class="btn btn--secondary media-btn">
-                  <svg class="media-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                  </svg>
-                  {{ 'product.details.virtual_tour' | t }}
-                </a>
-              {% endif %}
-              {% if product.metafields.custom.video_url %}
-                <a href="{{ product.metafields.custom.video_url }}" target="_blank" class="btn btn--secondary media-btn">
-                  <svg class="media-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
-                  </svg>
-                  {{ 'product.details.video' | t }}
-                </a>
-              {% endif %}
-            </div>
-          </div>
-        {% endif %}
-      </section>
     </div>
 
-    <!-- Agent Information -->
-    {% if product.metafields.custom.agent_name or product.metafields.custom.agent_phone or product.metafields.custom.agent_email %}
-      <section class="property-agent">
-        <div class="agent-card">
-          <h2>{{ 'product.agent.title' | t }}</h2>
-          {% if product.metafields.custom.agent_name %}
-            <h3 class="agent-name">{{ product.metafields.custom.agent_name }}</h3>
-          {% endif %}
-          
-          <div class="agent-contact">
-            {% if product.metafields.custom.agent_phone %}
-              <div class="agent-contact-item">
-                <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                </svg>
-                <a href="tel:{{ product.metafields.custom.agent_phone }}">{{ product.metafields.custom.agent_phone }}</a>
-              </div>
-            {% endif %}
-            
-            {% if product.metafields.custom.agent_email %}
-              <div class="agent-contact-item">
-                <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                </svg>
-                <a href="mailto:{{ product.metafields.custom.agent_email }}">{{ product.metafields.custom.agent_email }}</a>
-              </div>
-            {% endif %}
-          </div>
+    <!-- Image Gallery -->
+    <div class="property-gallery">
+      {% if product.images.size > 0 %}
+        <div class="main-image">
+          <img src="{{ product.featured_image | img_url: '800x600' }}" alt="{{ product.title }}" id="mainImage">
         </div>
-      </section>
-    {% endif %}
-
-    <!-- Contact Section -->
-    <section class="property-contact">
-      <div class="contact-card">
-        <h2>{{ 'product.contact.title' | t }}</h2>
-        <p>{{ 'product.contact.subtitle' | t }}</p>
-        
-        <div class="contact-actions">
-          <a href="#appointment-form" class="btn btn--primary">
-            {{ 'product.contact.schedule' | t }}
-          </a>
-          
-          {% if settings.whatsapp_number %}
-            <a 
-              href="https://wa.me/{{ settings.whatsapp_number }}?text={{ 'product.contact.whatsapp_message' | t | append: ' ' | append: product.title | url_encode }}"
-              target="_blank"
-              class="btn btn--secondary"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.63"/>
-              </svg>
-              {{ 'product.contact.whatsapp' | t }}
-            </a>
-          {% endif %}
-        </div>
-      </div>
-    </section>
-
-    <!-- Appointment Scheduling Form -->
-    <section class="appointment-form" id="appointment-form">
-      <div class="container">
-        <div class="appointment-form__header">
-          <h2>{{ 'product.appointment.title' | t }}</h2>
-          <p>{{ 'product.appointment.subtitle' | t }}</p>
-        </div>
-
-        <div class="appointment-form__wrapper">
-          {% comment %} Success Message {% endcomment %}
-          <div class="form-message form-message--success" id="appointment-success" style="display: none;">
-            <div class="form-message__content">
-              <svg class="form-message__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M9 12l2 2 4-4"></path>
-                <circle cx="12" cy="12" r="10"></circle>
-              </svg>
-              <div>
-                <h3>{{ 'product.appointment.success.title' | t }}</h3>
-                <p>{{ 'product.appointment.success.message' | t }}</p>
-              </div>
-            </div>
-          </div>
-
-          {% comment %} Error Message {% endcomment %}
-          <div class="form-message form-message--error" id="appointment-error" style="display: none;">
-            <div class="form-message__content">
-              <svg class="form-message__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="15" y1="9" x2="9" y2="15"></line>
-                <line x1="9" y1="9" x2="15" y2="15"></line>
-              </svg>
-              <div>
-                <h3>{{ 'product.appointment.error.title' | t }}</h3>
-                <p id="appointment-error-message-text">{{ 'product.appointment.error.message' | t }}</p>
-              </div>
-            </div>
-          </div>
-
-          {% comment %} Appointment Form {% endcomment %}
-          <form action="/contact" method="post" class="contact-form appointment-contact-form" id="appointment-form-element" novalidate>
-            <input type="hidden" name="form_type" value="contact">
-            <input type="hidden" name="utf8" value="✓">
-            <input type="hidden" name="contact[subject]" value="Solicitud de cita para {{ product.title }}">
-            
-            <div class="form-row form-row--two-columns">
-              <div class="form-group">
-                <label for="appointment_name" class="form-label">
-                  {{ 'product.appointment.fields.name.label' | t }} <span class="required">*</span>
-                </label>
-                <input 
-                  type="text" 
-                  id="appointment_name" 
-                  name="contact[name]" 
-                  class="form-input"
-                  required
-                  data-validate="required"
-                  data-error-message="{{ 'product.appointment.fields.name.error' | t }}"
-                >
-                <span class="form-error" id="appointment_name_error"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="appointment_email" class="form-label">
-                  {{ 'product.appointment.fields.email.label' | t }} <span class="required">*</span>
-                </label>
-                <input 
-                  type="email" 
-                  id="appointment_email" 
-                  name="contact[email]" 
-                  class="form-input"
-                  required
-                  data-validate="email"
-                  data-error-message="{{ 'product.appointment.fields.email.error' | t }}"
-                >
-                <span class="form-error" id="appointment_email_error"></span>
-              </div>
-            </div>
-
-            <div class="form-row form-row--two-columns">
-              <div class="form-group">
-                <label for="appointment_phone" class="form-label">
-                  {{ 'product.appointment.fields.phone.label' | t }} <span class="required">*</span>
-                </label>
-                <input 
-                  type="tel" 
-                  id="appointment_phone" 
-                  name="contact[phone]" 
-                  class="form-input"
-                  required
-                  data-validate="phone"
-                  data-error-message="{{ 'product.appointment.fields.phone.error' | t }}"
-                  placeholder="{{ 'product.appointment.fields.phone.placeholder' | t }}"
-                >
-                <span class="form-error" id="appointment_phone_error"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="appointment_date" class="form-label">
-                  {{ 'product.appointment.fields.date.label' | t }} <span class="required">*</span>
-                </label>
-                <input 
-                  type="date" 
-                  id="appointment_date" 
-                  name="contact[appointment_date]" 
-                  class="form-input"
-                  required
-                  data-validate="required"
-                  data-error-message="{{ 'product.appointment.fields.date.error' | t }}"
-                  min="{{ 'now' | date: '%Y-%m-%d' }}"
-                >
-                <span class="form-error" id="appointment_date_error"></span>
-              </div>
-            </div>
-
-            <div class="form-row form-row--two-columns">
-              <div class="form-group">
-                <label for="appointment_time" class="form-label">
-                  {{ 'product.appointment.fields.time.label' | t }} <span class="required">*</span>
-                </label>
-                <select 
-                  id="appointment_time" 
-                  name="contact[appointment_time]" 
-                  class="form-select"
-                  required
-                  data-validate="required"
-                  data-error-message="{{ 'product.appointment.fields.time.error' | t }}"
-                >
-                  <option value="">{{ 'product.appointment.fields.time.placeholder' | t }}</option>
-                  <option value="09:00">09:00 AM</option>
-                  <option value="10:00">10:00 AM</option>
-                  <option value="11:00">11:00 AM</option>
-                  <option value="12:00">12:00 PM</option>
-                  <option value="13:00">01:00 PM</option>
-                  <option value="14:00">02:00 PM</option>
-                  <option value="15:00">03:00 PM</option>
-                  <option value="16:00">04:00 PM</option>
-                  <option value="17:00">05:00 PM</option>
-                  <option value="18:00">06:00 PM</option>
-                </select>
-                <span class="form-error" id="appointment_time_error"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="appointment_type" class="form-label">
-                  {{ 'product.appointment.fields.type.label' | t }} <span class="required">*</span>
-                </label>
-                <select 
-                  id="appointment_type" 
-                  name="contact[appointment_type]" 
-                  class="form-select"
-                  required
-                  data-validate="required"
-                  data-error-message="{{ 'product.appointment.fields.type.error' | t }}"
-                >
-                  <option value="">{{ 'product.appointment.fields.type.placeholder' | t }}</option>
-                  <option value="visita">{{ 'product.appointment.fields.type.options.visit' | t }}</option>
-                  <option value="llamada">{{ 'product.appointment.fields.type.options.call' | t }}</option>
-                  <option value="videollamada">{{ 'product.appointment.fields.type.options.video' | t }}</option>
-                </select>
-                <span class="form-error" id="appointment_type_error"></span>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="appointment_message" class="form-label">
-                  {{ 'product.appointment.fields.message.label' | t }}
-                </label>
-                <textarea 
-                  id="appointment_message" 
-                  name="contact[body]" 
-                  class="form-textarea"
-                  rows="4"
-                  placeholder="{{ 'product.appointment.fields.message.placeholder' | t }}"
-                ></textarea>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <button type="submit" class="btn btn--primary btn--large form-submit" id="appointment-submit-btn">
-                <span class="btn-text">{{ 'product.appointment.submit' | t }}</span>
-                <span class="btn-loading" style="display: none;">
-                  <svg class="loading-spinner" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="31.416" stroke-dashoffset="31.416">
-                      <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416" repeatCount="indefinite"/>
-                      <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/>
-                    </circle>
-                  </svg>
-                  {{ 'product.appointment.submitting' | t }}
-                </span>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Lightbox Modal -->
-  <div id="lightbox" class="lightbox" style="display: none;">
-    <div class="lightbox-overlay"></div>
-    <div class="lightbox-content">
-      <button class="lightbox-close" aria-label="{{ 'product.gallery.close' | t }}">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-        </svg>
-      </button>
-      
-      <div class="lightbox-image-container">
-        <img id="lightboxImage" src="" alt="">
         
         {% if product.images.size > 1 %}
+          <div class="gallery-thumbnails">
+            {% for image in product.images limit: 8 %}
+              <img 
+                src="{{ image | img_url: '120x90' }}" 
+                alt="{{ product.title }} - Imagen {{ forloop.index }}"
+                class="thumbnail{% if forloop.first %} active{% endif %}"
+                onclick="changeMainImage('{{ image | img_url: '800x600' }}')"
+              >
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% else %}
+        <div class="no-image">
+          <p>Sin imágenes disponibles</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Property Specifications -->
+    <div class="property-specs">
+      <h2>Especificaciones</h2>
+      
+      <div class="specs-grid">
+        {% if product.metafields.custom.bedrooms %}
+          <div class="spec-item">
+            <span class="spec-icon">🛏️</span>
+            <span class="spec-label">Recámaras</span>
+            <span class="spec-value">{{ product.metafields.custom.bedrooms }}</span>
+          </div>
+        {% endif %}
+        
+        {% if product.metafields.custom.bathrooms %}
+          <div class="spec-item">
+            <span class="spec-icon">🚿</span>
+            <span class="spec-label">Baños</span>
+            <span class="spec-value">{{ product.metafields.custom.bathrooms }}</span>
+          </div>
+        {% endif %}
+        
+        {% if product.metafields.custom.square_meters %}
+          <div class="spec-item">
+            <span class="spec-icon">📐</span>
+            <span class="spec-label">Área</span>
+            <span class="spec-value">{{ product.metafields.custom.square_meters }} m²</span>
+          </div>
+        {% endif %}
+        
+        {% if product.metafields.custom.parking_spaces %}
+          <div class="spec-item">
+            <span class="spec-icon">🚗</span>
+            <span class="spec-label">Estacionamiento</span>
+            <span class="spec-value">{{ product.metafields.custom.parking_spaces }} espacio{% if product.metafields.custom.parking_spaces != 1 %}s{% endif %}</span>
+          </div>
+        {% endif %}
+        
+        {% if product.metafields.custom.property_type %}
+          <div class="spec-item">
+            <span class="spec-icon">🏠</span>
+            <span class="spec-label">Tipo</span>
+            <span class="spec-value">{{ product.metafields.custom.property_type | capitalize }}</span>
+          </div>
+        {% endif %}
+        
+        {% if product.metafields.custom.year_built %}
+          <div class="spec-item">
+            <span class="spec-icon">📅</span>
+            <span class="spec-label">Año de construcción</span>
+            <span class="spec-value">{{ product.metafields.custom.year_built }}</span>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Property Description -->
+    {% if product.description != blank %}
+      <div class="property-description">
+        <h2>Descripción</h2>
+        <div class="description-content">
+          {{ product.description }}
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Call to Action Buttons -->
+    <div class="property-actions">
+      <h2>¿Te interesa esta propiedad?</h2>
+      <div class="action-buttons">
+        <a 
+          href="https://wa.me/{{ settings.whatsapp_number | default: '521234567890' }}?text=Hola, me interesa la propiedad: {{ product.title | url_encode }} - {{ shop.url }}{{ product.url }}"
+          target="_blank"
+          class="btn btn--primary btn--whatsapp"
+        >
+          📱 Agendar Cita por WhatsApp
+        </a>
+        
+        <a href="tel:{{ settings.phone_number | default: '+52 123 456 7890' }}" class="btn btn--secondary">
+          📞 Llamar Ahora
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Función para cambiar la imagen principal
+function changeMainImage(imageSrc) {
+  document.getElementById('mainImage').src = imageSrc;
+  
+  // Actualizar thumbnails activos
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  thumbnails.forEach(thumb => thumb.classList.remove('active'));
+  event.target.classList.add('active');
+}
+</script>% if product.images.size > 1 %}
           <button class="lightbox-nav lightbox-prev" aria-label="{{ 'product.gallery.previous' | t }}">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>

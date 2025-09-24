@@ -86,6 +86,31 @@ Si el problema persiste:
 2. Revisa los logs de Shopify
 3. Contacta al soporte de Shopify
 
+## 🏠 Características del Tema
+
+### Página de Producto (Propiedades)
+- **Galería de imágenes** con slider interactivo
+- **Especificaciones completas** (recámaras, baños, m², etc.)
+- **Botón de WhatsApp** para agendar citas directamente
+- **Información detallada** con metafields personalizados
+- **Descripción del proyecto** con formato rico
+- **Call-to-action prominente** para contacto
+
+### Metafields Incluidos
+- 📍 Ubicación, tipo de propiedad, estado
+- 🏠 Recámaras, baños, metros cuadrados
+- 🚗 Estacionamiento, año de construcción
+- ✨ Características y amenidades
+- 👤 Información del agente responsable
+- 🎥 Enlaces a tours virtuales y videos
+
+### Diseño General
+- Diseño responsivo optimizado para móviles
+- Secciones: Hero, Beneficios, Testimonios, Formulario de contacto
+- Integración completa con WhatsApp
+- SEO optimizado para bienes raíces
+- Colores y tipografías personalizables
+
 ## Configuración Recomendada
 
 ### Configuración mínima:
@@ -95,12 +120,18 @@ Si el problema persiste:
 - ✅ Colores del tema
 - ✅ Título y subtítulo del hero
 
+### Configuración de Propiedades:
+- ✅ Configurar metafields (ver `docs/metafields-setup-guide.md`)
+- ✅ Subir imágenes de alta calidad
+- ✅ Completar especificaciones básicas
+- ✅ Agregar descripción detallada
+
 ### Configuración avanzada:
 - Imagen de fondo del hero
 - Testimonios personalizados
 - Beneficios de la empresa
 - Redes sociales
-- Configuración SEO
+- Tours virtuales y videos
 
 ## Estructura de Archivos
 

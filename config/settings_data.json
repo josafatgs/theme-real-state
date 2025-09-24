@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_primary": "#cd9d08",
@@ -99,7 +108,63 @@
     "show_property_price": true,
     "show_property_location": true,
     "show_property_specs": true,
-    "property_description_length": 100
+    "property_description_length": 100,
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "text": "Announcement"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify://shop_images/DORADO.png",
+          "phone_number": ""
+        }
+      },
+      "hero": {
+        "type": "hero",
+        "settings": {
+          "title": "Hero Title"
+        }
+      },
+      "benefits": {
+        "type": "benefits",
+        "settings": {
+          "title": "Benefits"
+        }
+      },
+      "lead-form": {
+        "type": "lead-form",
+        "settings": {
+          "title": "Contact Form"
+        }
+      },
+      "testimonials": {
+        "type": "testimonials",
+        "settings": {
+          "title": "Testimonials"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "company_description": "Somos una empresa inmobiliaria comprometida con ayudarte a encontrar la propiedad perfecta para ti y tu familia.",
+          "address": "Av. Principal 123, Colonia Centro, Ciudad, CP 12345",
+          "phone_number": "+52 123 456 7890",
+          "email": "contacto@inmobiliaria.com",
+          "business_hours": "Lun - Vie: 9:00 AM - 6:00 PM",
+          "whatsapp_number": "",
+          "whatsapp_message": "Hola, me interesa obtener más información sobre sus propiedades.",
+          "show_social_links": true,
+          "facebook_url": "",
+          "instagram_url": "",
+          "youtube_url": ""
+        }
+      }
+    },
+    "content_for_index": []
   },
   "presets": {
     "Default": {

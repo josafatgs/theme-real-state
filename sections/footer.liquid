@@ -4,15 +4,16 @@
   <div class="footer__container">
     <!-- Main Footer Content -->
     <div class="footer__main">
-      <!-- Company Info -->
-      <div class="footer__section footer__section--company">
+      <!-- Company Info Column -->
+      <div class="footer__column footer__column--company">
         <div class="footer__logo">
           {%- if settings.logo != blank -%}
-            <img src="{{ settings.logo | image_url: width: 180 }}" 
+            <img src="{{ settings.logo | image_url: width: 160 }}" 
                  alt="{{ shop.name }}" 
                  class="footer__logo-img"
-                 width="180"
-                 height="auto">
+                 width="160"
+                 height="auto"
+                 loading="lazy">
           {%- else -%}
             <h3 class="footer__logo-text">{{ shop.name }}</h3>
           {%- endif -%}
@@ -33,8 +34,8 @@
                    rel="noopener noreferrer"
                    class="footer__social-link"
                    aria-label="Síguenos en Facebook">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                   </svg>
                 </a>
               {%- endif -%}
@@ -45,10 +46,8 @@
                    rel="noopener noreferrer"
                    class="footer__social-link"
                    aria-label="Síguenos en Instagram">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
-                    <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"/>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323c.875-.875 2.026-1.297 3.323-1.297s2.448.422 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.244c-.875.807-2.026 1.297-3.323 1.297zm7.83-9.608h-1.297V5.708h1.297v1.672zm-1.297 9.608c-1.297 0-2.448-.49-3.323-1.297-.928-.796-1.418-1.947-1.418-3.244s.49-2.448 1.418-3.323c.875-.875 2.026-1.297 3.323-1.297s2.448.422 3.323 1.297c.928.875 1.418 2.026 1.418 3.323s-.49 2.448-1.418 3.244c-.875.807-2.026 1.297-3.323 1.297z"/>
                   </svg>
                 </a>
               {%- endif -%}
@@ -59,9 +58,32 @@
                    rel="noopener noreferrer"
                    class="footer__social-link"
                    aria-label="Síguenos en YouTube">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" stroke="currentColor" stroke-width="2"/>
-                    <polygon points="9.75,15.02 15.5,11.75 9.75,8.48" fill="currentColor"/>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </a>
+              {%- endif -%}
+
+              {%- if section.settings.twitter_url != blank -%}
+                <a href="{{ section.settings.twitter_url }}" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="footer__social-link"
+                   aria-label="Síguenos en Twitter">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                  </svg>
+                </a>
+              {%- endif -%}
+
+              {%- if section.settings.linkedin_url != blank -%}
+                <a href="{{ section.settings.linkedin_url }}" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="footer__social-link"
+                   aria-label="Síguenos en LinkedIn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
                 </a>
               {%- endif -%}
@@ -70,49 +92,100 @@
         {%- endif -%}
       </div>
 
-      <!-- Quick Links -->
-      <div class="footer__section footer__section--links">
-        <h4 class="footer__section-title">Enlaces Rápidos</h4>
-        <ul class="footer__links">
-          <li><a href="{{ routes.root_url }}" class="footer__link">Inicio</a></li>
-          <li><a href="{{ collections.propiedades.url | default: '/collections/propiedades' }}" class="footer__link">Propiedades</a></li>
-          <li><a href="{{ collections.casas.url | default: '/collections/casas' }}" class="footer__link">Casas</a></li>
-          <li><a href="{{ collections.departamentos.url | default: '/collections/departamentos' }}" class="footer__link">Departamentos</a></li>
-          <li><a href="{{ collections.terrenos.url | default: '/collections/terrenos' }}" class="footer__link">Terrenos</a></li>
-          <li><a href="#contact-form" class="footer__link">Contacto</a></li>
-        </ul>
-      </div>
+      <!-- Navigation Links Column -->
+      {%- if section.settings.show_navigation_links -%}
+        <div class="footer__column footer__column--navigation">
+          <h4 class="footer__column-title">{{ section.settings.navigation_title | default: 'Navegación' }}</h4>
+          <ul class="footer__links">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'navigation_link' -%}
+                  <li class="footer__link-item">
+                    <a href="{{ block.settings.link }}" class="footer__link">
+                      {{ block.settings.label }}
+                    </a>
+                  </li>
+              {%- endcase -%}
+            {%- endfor -%}
+            
+            {%- comment -%} Default links if no blocks are added {%- endcomment -%}
+            {%- if section.blocks.size == 0 -%}
+              <li class="footer__link-item">
+                <a href="{{ routes.root_url }}" class="footer__link">Inicio</a>
+              </li>
+              <li class="footer__link-item">
+                <a href="{{ collections.propiedades.url | default: '/collections/propiedades' }}" class="footer__link">Propiedades</a>
+              </li>
+              <li class="footer__link-item">
+                <a href="{{ collections.casas.url | default: '/collections/casas' }}" class="footer__link">Casas</a>
+              </li>
+              <li class="footer__link-item">
+                <a href="{{ collections.departamentos.url | default: '/collections/departamentos' }}" class="footer__link">Departamentos</a>
+              </li>
+              <li class="footer__link-item">
+                <a href="{{ collections.terrenos.url | default: '/collections/terrenos' }}" class="footer__link">Terrenos</a>
+              </li>
+            {%- endif -%}
+          </ul>
+        </div>
+      {%- endif -%}
 
-      <!-- Services -->
-      <div class="footer__section footer__section--services">
-        <h4 class="footer__section-title">Servicios</h4>
-        <ul class="footer__links">
-          <li><span class="footer__service">Compra de Propiedades</span></li>
-          <li><span class="footer__service">Venta de Propiedades</span></li>
-          <li><span class="footer__service">Asesoría Inmobiliaria</span></li>
-          <li><span class="footer__service">Evaluación de Propiedades</span></li>
-          <li><span class="footer__service">Financiamiento</span></li>
-          <li><span class="footer__service">Trámites Legales</span></li>
-        </ul>
-      </div>
+      <!-- Services Column -->
+      {%- if section.settings.show_services -%}
+        <div class="footer__column footer__column--services">
+          <h4 class="footer__column-title">{{ section.settings.services_title | default: 'Servicios' }}</h4>
+          <ul class="footer__links">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'service_item' -%}
+                  <li class="footer__link-item">
+                    {%- if block.settings.service_link != blank -%}
+                      <a href="{{ block.settings.service_link }}" class="footer__link">
+                        {{ block.settings.service_name }}
+                      </a>
+                    {%- else -%}
+                      <span class="footer__service">{{ block.settings.service_name }}</span>
+                    {%- endif -%}
+                  </li>
+              {%- endcase -%}
+            {%- endfor -%}
+            
+            {%- comment -%} Default services if no blocks are added {%- endcomment -%}
+            {%- if section.blocks.size == 0 -%}
+              <li class="footer__link-item">
+                <span class="footer__service">Compra de Propiedades</span>
+              </li>
+              <li class="footer__link-item">
+                <span class="footer__service">Venta de Propiedades</span>
+              </li>
+              <li class="footer__link-item">
+                <span class="footer__service">Asesoría Inmobiliaria</span>
+              </li>
+              <li class="footer__link-item">
+                <span class="footer__service">Evaluación de Propiedades</span>
+              </li>
+            {%- endif -%}
+          </ul>
+        </div>
+      {%- endif -%}
 
-      <!-- Contact Info -->
-      <div class="footer__section footer__section--contact">
-        <h4 class="footer__section-title">Contacto</h4>
+      <!-- Contact Info Column -->
+      <div class="footer__column footer__column--contact">
+        <h4 class="footer__column-title">{{ section.settings.contact_title | default: 'Contacto' }}</h4>
         <div class="footer__contact-info">
           {%- if section.settings.address != blank -%}
             <div class="footer__contact-item">
-              <svg class="footer__contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <svg class="footer__contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/>
                 <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
               </svg>
-              <span>{{ section.settings.address }}</span>
+              <span class="footer__contact-text">{{ section.settings.address }}</span>
             </div>
           {%- endif -%}
           
           {%- if section.settings.phone_number != blank -%}
             <div class="footer__contact-item">
-              <svg class="footer__contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <svg class="footer__contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <a href="tel:{{ section.settings.phone_number }}" class="footer__contact-link">
@@ -123,7 +196,7 @@
           
           {%- if section.settings.email != blank -%}
             <div class="footer__contact-item">
-              <svg class="footer__contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <svg class="footer__contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2"/>
                 <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2"/>
               </svg>
@@ -135,11 +208,11 @@
           
           {%- if section.settings.business_hours != blank -%}
             <div class="footer__contact-item">
-              <svg class="footer__contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <svg class="footer__contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
                 <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2"/>
               </svg>
-              <span>{{ section.settings.business_hours }}</span>
+              <span class="footer__contact-text">{{ section.settings.business_hours }}</span>
             </div>
           {%- endif -%}
         </div>
@@ -150,10 +223,10 @@
              target="_blank" 
              rel="noopener noreferrer"
              class="footer__whatsapp-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" fill="currentColor"/>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
             </svg>
-            Contactar por WhatsApp
+            <span>Contactar por WhatsApp</span>
           </a>
         {%- endif -%}
       </div>
@@ -163,14 +236,28 @@
     <div class="footer__bottom">
       <div class="footer__bottom-content">
         <div class="footer__copyright">
-          <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Todos los derechos reservados.</p>
+          <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_text | default: 'Todos los derechos reservados.' }}</p>
         </div>
         
-        <div class="footer__legal">
-          <a href="/pages/privacy-policy" class="footer__legal-link">Política de Privacidad</a>
-          <span class="footer__legal-separator">|</span>
-          <a href="/pages/terms-of-service" class="footer__legal-link">Términos de Servicio</a>
-        </div>
+        {%- if section.settings.show_legal_links -%}
+          <div class="footer__legal">
+            {%- if section.settings.privacy_policy_url != blank -%}
+              <a href="{{ section.settings.privacy_policy_url }}" class="footer__legal-link">
+                {{ section.settings.privacy_policy_text | default: 'Política de Privacidad' }}
+              </a>
+            {%- endif -%}
+            
+            {%- if section.settings.privacy_policy_url != blank and section.settings.terms_of_service_url != blank -%}
+              <span class="footer__legal-separator">|</span>
+            {%- endif -%}
+            
+            {%- if section.settings.terms_of_service_url != blank -%}
+              <a href="{{ section.settings.terms_of_service_url }}" class="footer__legal-link">
+                {{ section.settings.terms_of_service_text | default: 'Términos de Servicio' }}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -182,20 +269,55 @@
   "settings": [
     {
       "type": "header",
-      "content": "Información de la empresa"
+      "content": "Información de la Empresa"
     },
     {
       "type": "textarea",
       "id": "company_description",
       "label": "Descripción de la empresa",
-      "default": "Somos una empresa inmobiliaria comprometida con ayudarte a encontrar la propiedad perfecta para ti y tu familia."
+      "default": "Somos una empresa inmobiliaria comprometida con ayudarte a encontrar la propiedad perfecta para ti y tu familia.",
+      "info": "Aparece debajo del logo en el footer"
     },
     {
       "type": "header",
-      "content": "Información de contacto"
+      "content": "Columnas del Footer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation_links",
+      "label": "Mostrar columna de navegación",
+      "default": true
     },
     {
       "type": "text",
+      "id": "navigation_title",
+      "label": "Título de la columna de navegación",
+      "default": "Navegación"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_services",
+      "label": "Mostrar columna de servicios",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "services_title",
+      "label": "Título de la columna de servicios",
+      "default": "Servicios"
+    },
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "Título de la columna de contacto",
+      "default": "Contacto"
+    },
+    {
+      "type": "header",
+      "content": "Información de Contacto"
+    },
+    {
+      "type": "textarea",
       "id": "address",
       "label": "Dirección",
       "default": "Av. Principal 123, Colonia Centro, Ciudad, CP 12345"
@@ -204,7 +326,8 @@
       "type": "text",
       "id": "phone_number",
       "label": "Número de teléfono",
-      "default": "+52 123 456 7890"
+      "default": "+52 123 456 7890",
+      "info": "Formato: +52 123 456 7890"
     },
     {
       "type": "text",
@@ -219,20 +342,25 @@
       "default": "Lun - Vie: 9:00 AM - 6:00 PM"
     },
     {
-      "type": "text",
-      "id": "whatsapp_number",
-      "label": "Número de WhatsApp",
-      "info": "Solo números, ejemplo: 5212345678901"
+      "type": "header",
+      "content": "WhatsApp"
     },
     {
       "type": "text",
+      "id": "whatsapp_number",
+      "label": "Número de WhatsApp",
+      "info": "Solo números, ejemplo: 5212345678901",
+      "placeholder": "5212345678901"
+    },
+    {
+      "type": "textarea",
       "id": "whatsapp_message",
       "label": "Mensaje predeterminado de WhatsApp",
       "default": "Hola, me interesa obtener más información sobre sus propiedades."
     },
     {
       "type": "header",
-      "content": "Redes sociales"
+      "content": "Redes Sociales"
     },
     {
       "type": "checkbox",
@@ -243,17 +371,169 @@
     {
       "type": "url",
       "id": "facebook_url",
-      "label": "URL de Facebook"
+      "label": "URL de Facebook",
+      "info": "https://facebook.com/tu-pagina"
     },
     {
       "type": "url",
       "id": "instagram_url",
-      "label": "URL de Instagram"
+      "label": "URL de Instagram",
+      "info": "https://instagram.com/tu-cuenta"
     },
     {
       "type": "url",
       "id": "youtube_url",
-      "label": "URL de YouTube"
+      "label": "URL de YouTube",
+      "info": "https://youtube.com/tu-canal"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "URL de Twitter",
+      "info": "https://twitter.com/tu-cuenta"
+    },
+    {
+      "type": "url",
+      "id": "linkedin_url",
+      "label": "URL de LinkedIn",
+      "info": "https://linkedin.com/company/tu-empresa"
+    },
+    {
+      "type": "header",
+      "content": "Footer Inferior"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Texto de copyright",
+      "default": "Todos los derechos reservados.",
+      "info": "Se agrega después del año y nombre de la tienda"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_legal_links",
+      "label": "Mostrar enlaces legales",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "privacy_policy_url",
+      "label": "URL de Política de Privacidad",
+      "info": "/pages/privacy-policy"
+    },
+    {
+      "type": "text",
+      "id": "privacy_policy_text",
+      "label": "Texto del enlace de Política de Privacidad",
+      "default": "Política de Privacidad"
+    },
+    {
+      "type": "url",
+      "id": "terms_of_service_url",
+      "label": "URL de Términos de Servicio",
+      "info": "/pages/terms-of-service"
+    },
+    {
+      "type": "text",
+      "id": "terms_of_service_text",
+      "label": "Texto del enlace de Términos de Servicio",
+      "default": "Términos de Servicio"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "navigation_link",
+      "name": "Enlace de Navegación",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Texto del enlace",
+          "default": "Enlace"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "URL del enlace"
+        }
+      ]
+    },
+    {
+      "type": "service_item",
+      "name": "Servicio",
+      "settings": [
+        {
+          "type": "text",
+          "id": "service_name",
+          "label": "Nombre del servicio",
+          "default": "Servicio"
+        },
+        {
+          "type": "url",
+          "id": "service_link",
+          "label": "Enlace del servicio (opcional)",
+          "info": "Si se deja vacío, será solo texto"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "navigation_link",
+          "settings": {
+            "label": "Inicio",
+            "link": "/"
+          }
+        },
+        {
+          "type": "navigation_link",
+          "settings": {
+            "label": "Propiedades",
+            "link": "/collections/propiedades"
+          }
+        },
+        {
+          "type": "navigation_link",
+          "settings": {
+            "label": "Casas",
+            "link": "/collections/casas"
+          }
+        },
+        {
+          "type": "navigation_link",
+          "settings": {
+            "label": "Departamentos",
+            "link": "/collections/departamentos"
+          }
+        },
+        {
+          "type": "service_item",
+          "settings": {
+            "service_name": "Compra de Propiedades"
+          }
+        },
+        {
+          "type": "service_item",
+          "settings": {
+            "service_name": "Venta de Propiedades"
+          }
+        },
+        {
+          "type": "service_item",
+          "settings": {
+            "service_name": "Asesoría Inmobiliaria"
+          }
+        },
+        {
+          "type": "service_item",
+          "settings": {
+            "service_name": "Evaluación de Propiedades"
+          }
+        }
+      ]
     }
   ]
 }

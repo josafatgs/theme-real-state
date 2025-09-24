@@ -48,168 +48,29 @@
     </form>
   </div>
 </section>
-          <svg class="form-message__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="15" y1="9" x2="9" y2="15"></line>
-            <line x1="9" y1="9" x2="15" y2="15"></line>
-          </svg>
-          <div>
-            <h3>Error al enviar el mensaje</h3>
-            <p id="error-message-text">Por favor, verifica los datos e intenta nuevamente.</p>
-          </div>
-        </div>
-      </div>
-
-      {% comment %} Contact Form {% endcomment %}
-      <form action="/contact" method="post" class="contact-form" id="lead-capture-form" novalidate aria-labelledby="form-title" role="form">
-        <input type="hidden" name="form_type" value="contact">
-        <input type="hidden" name="utf8" value="✓">
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label for="contact_name" class="form-label">
-              Nombre completo <span class="required">*</span>
-            </label>
-            <input 
-              type="text" 
-              id="contact_name" 
-              name="contact[name]" 
-              class="form-input"
-              required
-              data-validate="required"
-              data-error-message="Por favor ingresa tu nombre completo"
-              aria-describedby="contact_name_error"
-              aria-required="true"
-              autocomplete="name"
-            >
-            <span class="form-error" id="contact_name_error" role="alert" aria-live="polite"></span>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="contact_email" class="form-label">
-              Correo electrónico <span class="required">*</span>
-            </label>
-            <input 
-              type="email" 
-              id="contact_email" 
-              name="contact[email]" 
-              class="form-input"
-              required
-              data-validate="email"
-              data-error-message="Por favor ingresa un correo electrónico válido"
-              aria-describedby="contact_email_error"
-              aria-required="true"
-              autocomplete="email"
-            >
-            <span class="form-error" id="contact_email_error" role="alert" aria-live="polite"></span>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="contact_phone" class="form-label">
-              Teléfono <span class="required">*</span>
-            </label>
-            <input 
-              type="tel" 
-              id="contact_phone" 
-              name="contact[phone]" 
-              class="form-input"
-              required
-              data-validate="phone"
-              data-error-message="Por favor ingresa un número de teléfono válido"
-              placeholder="Ej: +52 123 456 7890"
-              aria-describedby="contact_phone_error"
-              aria-required="true"
-              autocomplete="tel"
-            >
-            <span class="form-error" id="contact_phone_error" role="alert" aria-live="polite"></span>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="property_type" class="form-label">
-              Tipo de propiedad de interés <span class="required">*</span>
-            </label>
-            <select 
-              id="property_type" 
-              name="contact[property_type]" 
-              class="form-select"
-              required
-              data-validate="required"
-              data-error-message="Por favor selecciona un tipo de propiedad"
-              aria-describedby="property_type_error"
-              aria-required="true"
-            >
-              <option value="">Selecciona una opción</option>
-              <option value="casa">Casa</option>
-              <option value="departamento">Departamento</option>
-              <option value="terreno">Terreno</option>
-              <option value="local_comercial">Local Comercial</option>
-              <option value="oficina">Oficina</option>
-            </select>
-            <span class="form-error" id="property_type_error" role="alert" aria-live="polite"></span>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="contact_message" class="form-label">
-              Mensaje adicional (opcional)
-            </label>
-            <textarea 
-              id="contact_message" 
-              name="contact[body]" 
-              class="form-textarea"
-              rows="4"
-              placeholder="Cuéntanos más sobre lo que buscas..."
-              aria-describedby="form-description"
-            ></textarea>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <button type="submit" class="btn btn--primary btn--large form-submit" id="form-submit-btn" aria-describedby="form-description">
-            <span class="btn-text">{{ settings.lead_form_button_text | default: 'Enviar información' }}</span>
-            <span class="btn-loading" style="display: none;" aria-hidden="true">
-              <svg class="loading-spinner" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="31.416" stroke-dashoffset="31.416">
-                  <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416" repeatCount="indefinite"/>
-                  <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/>
-                </circle>
-              </svg>
-              Enviando...
-            </span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
 
 {% schema %}
 {
-  "name": "Formulario de Contacto",
+  "name": "Lead Form Section",
+  "tag": "section",
+  "class": "lead-form-section",
   "settings": [
     {
       "type": "text",
-      "id": "form_title",
-      "label": "Título del formulario",
-      "default": "Contáctanos"
+      "id": "lead_form_title",
+      "label": "Section Title",
+      "default": "¿Buscas una propiedad?"
     },
     {
       "type": "textarea",
-      "id": "form_subtitle",
-      "label": "Subtítulo del formulario",
-      "default": "Déjanos tus datos y te contactaremos para ayudarte a encontrar la propiedad perfecta"
+      "id": "lead_form_subtitle",
+      "label": "Section Subtitle",
+      "default": "Déjanos tus datos y te contactaremos con las mejores opciones"
     }
   ],
   "presets": [
     {
-      "name": "Formulario de Contacto"
+      "name": "Lead Form Section"
     }
   ]
 }

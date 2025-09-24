@@ -1,49 +1,13 @@
-{% comment %}
-  Homepage Template
-  Displays the main landing page with hero, benefits, lead form, and testimonials sections
-  Requirements: 1.1, 1.5, 2.1, 7.1
-{% endcomment %}
-
-{% comment %} SEO Meta Tags for Homepage {% endcomment %}
-{% liquid
-  assign page_title = settings.homepage_title | default: 'Encuentra la casa de tus sueños'
-  assign page_description = settings.homepage_description | default: 'Encuentra la propiedad perfecta con nosotros. Casas, departamentos y terrenos en las mejores ubicaciones. Asesoría personalizada y procesos transparentes.'
-  
-  if shop.name != blank
-    assign page_description = page_description | replace: 'nosotros', shop.name
-  endif
-%}
-
-{% comment %} Structured Data for Homepage {% endcomment %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "RealEstateAgent",
-  "name": "{{ shop.name }}",
-  "url": "{{ shop.url }}",
-  "description": "{{ page_description | escape }}",
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": "MX"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "{{ settings.phone_number }}",
-    "contactType": "customer service"
-  }
-}
-</script>
-
-{% comment %} Hero Section - Requirement 1.1, 1.2, 1.3, 1.4 {% endcomment %}
+{% comment %} Hero Section {% endcomment %}
 {% section 'hero' %}
 
-{% comment %} Benefits Section - Requirement 1.5 {% endcomment %}
+{% comment %} Benefits Section {% endcomment %}
 {% section 'benefits' %}
 
-{% comment %} Lead Capture Form - Requirement 2.1 {% endcomment %}
+{% comment %} Lead Capture Form {% endcomment %}
 {% section 'lead-form' %}
 
-{% comment %} Testimonials Section - Requirement 7.1 {% endcomment %}
+{% comment %} Testimonials Section {% endcomment %}
 {% section 'testimonials' %}
 
 

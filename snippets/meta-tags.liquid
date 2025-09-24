@@ -121,5 +121,12 @@
   <meta name="article:modified_time" content="{{ product.updated_at | date: '%Y-%m-%d' }}">
 {%- endif -%}
 
-{%- comment -%} JSON-LD Structured Data {%- endcomment -%}
-{%- render 'structured-data' -%}
+{%- comment -%} Basic structured data {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name }}",
+  "url": "{{ shop.url }}"
+}
+</script>

@@ -6,11 +6,13 @@
     <div class="header__logo">
       <a href="{{ routes.root_url }}" class="header__logo-link">
         {%- if settings.logo != blank -%}
-          <img src="{{ settings.logo | image_url: width: 200 }}" 
+          {%- assign logo_width = settings.logo_width | default: 200 -%}
+          <img src="{{ settings.logo | image_url: width: logo_width }}" 
                alt="{{ shop.name }}" 
                class="header__logo-img"
-               width="200"
-               height="auto">
+               width="{{ logo_width }}"
+               height="auto"
+               loading="eager">
         {%- else -%}
           <span class="header__logo-text">{{ shop.name }}</span>
         {%- endif -%}
@@ -82,11 +84,13 @@
       <div class="mobile-nav__header">
         <div class="mobile-nav__logo">
           {%- if settings.logo != blank -%}
-            <img src="{{ settings.logo | image_url: width: 150 }}" 
+            {%- assign mobile_logo_width = settings.logo_width | default: 200 | divided_by: 1.3 | round -%}
+            <img src="{{ settings.logo | image_url: width: mobile_logo_width }}" 
                  alt="{{ shop.name }}" 
                  class="mobile-nav__logo-img"
-                 width="150"
-                 height="auto">
+                 width="{{ mobile_logo_width }}"
+                 height="auto"
+                 loading="eager">
           {%- else -%}
             <span class="mobile-nav__logo-text">{{ shop.name }}</span>
           {%- endif -%}
@@ -307,15 +311,36 @@
   "name": "Header",
   "settings": [
     {
+      "type": "header",
+      "content": "Logo Settings"
+    },
+    {
       "type": "image_picker",
       "id": "logo",
-      "label": "Logo"
+      "label": "Logo Image",
+      "info": "Upload your company logo. Recommended format: PNG with transparent background"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "default": 200,
+      "unit": "px",
+      "label": "Logo Width",
+      "info": "Adjust the width of your logo"
+    },
+    {
+      "type": "header",
+      "content": "Contact Information"
     },
     {
       "type": "text",
       "id": "phone_number",
-      "label": "Número de teléfono",
-      "info": "Formato: +52 123 456 7890"
+      "label": "Phone Number",
+      "info": "Format: +52 123 456 7890",
+      "placeholder": "+52 123 456 7890"
     }
   ]
 }

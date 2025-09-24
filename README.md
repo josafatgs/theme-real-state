@@ -121,10 +121,10 @@ Si el problema persiste:
 - ✅ Título y subtítulo del hero
 
 ### Configuración de Propiedades:
-- ✅ Configurar metafields (ver `docs/metafields-setup-guide.md`)
-- ✅ Subir imágenes de alta calidad
-- ✅ Completar especificaciones básicas
-- ✅ Agregar descripción detallada
+- ✅ **Configurar metafields** → `docs/metafields-setup-guide.md`
+- ✅ **Crear propiedades** → `docs/como-crear-propiedades-shopify.md`
+- ✅ **Checklist rápido** → `docs/checklist-propiedad.md`
+- ✅ **Template de ejemplo** → `docs/template-propiedad-ejemplo.md`
 
 ### Configuración avanzada:
 - Imagen de fondo del hero

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Customizer Test</title>
+    <style>
+        :root {
+            --primary-gold: #cd9d08;
+            --primary-white: #ffffff;
+            --dark-blue: #0d1b2a;
+            --section-blue: #1b263b;
+            --detail-blue: #415a77;
+            --text-dark: #333333;
+            --text-light: #666666;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: var(--primary-white);
+            color: var(--text-dark);
+        }
+        
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .btn {
+            background: var(--primary-gold);
+            color: var(--primary-white);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+        }
+        
+        .hero-title {
+            color: var(--dark-blue);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-card {
+            background: var(--primary-white);
+            border: 1px solid var(--detail-blue);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 10px;
+            display: inline-block;
+            width: 200px;
+        }
+        
+        .benefit-icon {
+            color: var(--primary-gold);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .testimonial-card {
+            background: var(--section-blue);
+            color: var(--primary-white);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 10px;
+            display: inline-block;
+            width: 250px;
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+    <h1>Theme Customizer Test - Real Estate Theme</h1>
+    
+    <div class="test-section">
+        <h2>Color Palette Test</h2>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <div style="background: var(--primary-gold); color: white; padding: 20px; border-radius: 4px;">
+                Primary Gold<br>#cd9d08
+            </div>
+            <div style="background: var(--dark-blue); color: white; padding: 20px; border-radius: 4px;">
+                Dark Blue<br>#0d1b2a
+            </div>
+            <div style="background: var(--section-blue); color: white; padding: 20px; border-radius: 4px;">
+                Section Blue<br>#1b263b
+            </div>
+            <div style="background: var(--detail-blue); color: white; padding: 20px; border-radius: 4px;">
+                Detail Blue<br>#415a77
+            </div>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Hero Section Test</h2>
+        <h1 class="hero-title">Encuentra la casa de tus sueños</h1>
+        <p>Te ayudamos a encontrar la propiedad perfecta para ti y tu familia</p>
+        <a href="#" class="btn">Ver Propiedades</a>
+    </div>
+    
+    <div class="test-section">
+        <h2>Benefits Section Test</h2>
+        <div class="benefit-card">
+            <div class="benefit-icon">🏠</div>
+            <h3>Experiencia Comprobada</h3>
+            <p>Más de 10 años ayudando a familias a encontrar su hogar ideal</p>
+        </div>
+        <div class="benefit-card">
+            <div class="benefit-icon">👥</div>
+            <h3>Asesoría Personalizada</h3>
+            <p>Te acompañamos en todo el proceso de compra o venta</p>
+        </div>
+        <div class="benefit-card">
+            <div class="benefit-icon">💰</div>
+            <h3>Mejores Precios</h3>
+            <p>Negociamos para obtener las mejores condiciones para ti</p>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Testimonials Section Test</h2>
+        <div class="testimonial-card">
+            <p>"Excelente servicio, me ayudaron a encontrar la casa perfecta para mi familia."</p>
+            <strong>- María González</strong>
+        </div>
+        <div class="testimonial-card">
+            <p>"Vendí mi propiedad rápidamente y al mejor precio. Muy confiables."</p>
+            <strong>- Carlos Rodríguez</strong>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Form Elements Test</h2>
+        <form style="max-width: 400px;">
+            <div style="margin-bottom: 15px;">
+                <label for="name">Nombre completo:</label><br>
+                <input type="text" id="name" style="width: 100%; padding: 10px; border: 1px solid var(--detail-blue); border-radius: 4px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="email">Correo electrónico:</label><br>
+                <input type="email" id="email" style="width: 100%; padding: 10px; border: 1px solid var(--detail-blue); border-radius: 4px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="property-type">Tipo de propiedad:</label><br>
+                <select id="property-type" style="width: 100%; padding: 10px; border: 1px solid var(--detail-blue); border-radius: 4px;">
+                    <option>Casa</option>
+                    <option>Departamento</option>
+                    <option>Terreno</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Enviar información</button>
+        </form>
+    </div>
+    
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/521234567890" class="whatsapp-btn" target="_blank">
+        📱
+    </a>
+    
+    <div class="test-section">
+        <h2>Theme Settings Coverage</h2>
+        <ul>
+            <li>✅ Colors - All brand colors properly defined and used</li>
+            <li>✅ Typography - Poppins and Inter fonts configured</li>
+            <li>✅ Hero Section - Title, subtitle, CTA customizable</li>
+            <li>✅ Benefits - 4 configurable benefit cards</li>
+            <li>✅ Testimonials - 3 configurable testimonials</li>
+            <li>✅ Contact Information - WhatsApp, company details</li>
+            <li>✅ Lead Form - Customizable form content</li>
+            <li>✅ Property Cards - Styling and display options</li>
+            <li>✅ SEO Settings - Meta tags, structured data</li>
+            <li>✅ Social Media - Links and sharing</li>
+        </ul>
+    </div>
+</body>
+</html>

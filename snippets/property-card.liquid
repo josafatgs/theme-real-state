@@ -1,0 +1,118 @@
+{% comment %}
+  Property Card Component
+  
+  Usage: {% render 'property-card', product: product %}
+  
+  Parameters:
+  - product: Shopify product object representing a property
+{% endcomment %}
+
+<article class="property-card" 
+     data-tags="{{ product.tags | join: ',' }}"
+     data-price="{{ product.price }}"
+     data-title="{{ product.title | escape }}"
+     role="article"
+     aria-labelledby="property-title-{{ product.id }}"
+     tabindex="0">
+  <div class="property-card__image">
+    {% if product.featured_image %}
+      <img 
+        src="{{ product.featured_image | img_url: '400x300' }}" 
+        srcset="{{ product.featured_image | img_url: '280x210' }} 280w,
+                {{ product.featured_image | img_url: '400x300' }} 400w,
+                {{ product.featured_image | img_url: '600x450' }} 600w,
+                {{ product.featured_image | img_url: '800x600' }} 800w"
+        sizes="(max-width: 480px) 280px, 
+               (max-width: 749px) 400px, 
+               (max-width: 990px) 300px, 
+               400px"
+        alt="{% if product.featured_image.alt != blank %}{{ product.featured_image.alt }}{% else %}{{ product.title }} - {% if product.metafields.custom.property_type %}{{ product.metafields.custom.property_type | capitalize }}{% endif %}{% if product.metafields.custom.location %} en {{ product.metafields.custom.location }}{% endif %}{% endif %}"
+        loading="lazy"
+        decoding="async"
+        class="property-card__img lazy"
+        width="400"
+        height="300"
+        data-src="{{ product.featured_image | img_url: '400x300' }}"
+        data-srcset="{{ product.featured_image | img_url: '280x210' }} 280w,
+                     {{ product.featured_image | img_url: '400x300' }} 400w,
+                     {{ product.featured_image | img_url: '600x450' }} 600w,
+                     {{ product.featured_image | img_url: '800x600' }} 800w"
+      >
+    {% else %}
+      <div class="property-card__placeholder" role="img" aria-label="Imagen no disponible para {{ product.title | escape }}">
+        <svg class="property-card__placeholder-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M19 7H5C3.89543 7 3 7.89543 3 9V18C3 19.1046 3.89543 20 5 20H19C20.1046 20 21 19.1046 21 18V9C21 7.89543 20.1046 7 19 7Z" stroke="currentColor" stroke-width="2"/>
+          <path d="M8.5 11C9.32843 11 10 10.3284 10 9.5C10 8.67157 9.32843 8 8.5 8C7.67157 8 7 8.67157 7 9.5C7 10.3284 7.67157 11 8.5 11Z" stroke="currentColor" stroke-width="2"/>
+          <path d="M21 15L16 10L5 21" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </div>
+    {% endif %}
+  </div>
+  
+  <div class="property-card__content">
+    <h3 class="property-card__title" id="property-title-{{ product.id }}">{{ product.title }}</h3>
+    
+    {% if product.price > 0 %}
+      <p class="property-card__price">{{ product.price | money_without_currency | append: ' MXN' }}</p>
+    {% else %}
+      <p class="property-card__price">Precio a consultar</p>
+    {% endif %}
+    
+    {% if product.metafields.custom.location %}
+      <p class="property-card__location">
+        <svg class="property-card__location-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 5.02944 7.02944 1 12 1C16.9706 1 21 5.02944 21 10Z" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        {{ product.metafields.custom.location }}
+      </p>
+    {% endif %}
+    
+    {% if product.description != blank %}
+      <p class="property-card__description">{{ product.description | strip_html | truncate: 100 }}</p>
+    {% endif %}
+    
+    <dl class="property-card__specs" aria-label="Especificaciones de la propiedad">
+      {% if product.metafields.custom.bedrooms %}
+        <div class="property-card__spec">
+          <svg class="property-card__spec-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M7 7H17C18.1046 7 19 7.89543 19 9V15H5V9C5 7.89543 5.89543 7 7 7Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M5 15V19H19V15" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <dt class="visually-hidden">Recámaras:</dt>
+          <dd>{{ product.metafields.custom.bedrooms }} rec</dd>
+        </div>
+      {% endif %}
+      
+      {% if product.metafields.custom.bathrooms %}
+        <div class="property-card__spec">
+          <svg class="property-card__spec-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9 6L9 7C9 8.65685 10.3431 10 12 10C13.6569 10 15 8.65685 15 7V6" stroke="currentColor" stroke-width="2"/>
+            <path d="M20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 11.4477 4.44772 11 5 11H19C19.5523 11 20 11.4477 20 12Z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <dt class="visually-hidden">Baños:</dt>
+          <dd>{{ product.metafields.custom.bathrooms }} baños</dd>
+        </div>
+      {% endif %}
+      
+      {% if product.metafields.custom.square_meters %}
+        <div class="property-card__spec">
+          <svg class="property-card__spec-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 3H21V21H3V3Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M9 9L15 15" stroke="currentColor" stroke-width="2"/>
+            <path d="M15 9L9 15" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <dt class="visually-hidden">Metros cuadrados:</dt>
+          <dd>{{ product.metafields.custom.square_meters }} m²</dd>
+        </div>
+      {% endif %}
+    </dl>
+    
+    <a href="{{ product.url }}" 
+       class="property-card__btn btn btn--primary"
+       aria-describedby="property-title-{{ product.id }}"
+       aria-label="Ver detalles de {{ product.title | escape }}">
+      Ver Detalles
+    </a>
+  </div>
+</div>

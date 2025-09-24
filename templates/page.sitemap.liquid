@@ -1,0 +1,122 @@
+{% comment %}
+  Sitemap Page Template
+  Provides a human-readable sitemap for visitors
+{% endcomment %}
+
+<div class="page-width">
+  <div class="main-page-title">
+    <h1 class="page-title h0">{{ page.title }}</h1>
+  </div>
+
+  <div class="rte">
+    {% if page.content != blank %}
+      {{ page.content }}
+    {% else %}
+      <p>Mapa del sitio con todas las páginas y propiedades disponibles:</p>
+    {% endif %}
+
+    <div class="sitemap-content">
+      <div class="sitemap-section">
+        <h2>Páginas principales</h2>
+        <ul>
+          <li><a href="{{ routes.root_url }}">Inicio</a></li>
+          {% for link in linklists.main-menu.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="sitemap-section">
+        <h2>Categorías de propiedades</h2>
+        <ul>
+          {% for collection in collections %}
+            {% unless collection.handle == 'frontpage' %}
+              <li>
+                <a href="{{ collection.url }}">{{ collection.title }}</a>
+                <span class="property-count">({{ collection.products_count }} propiedades)</span>
+              </li>
+            {% endunless %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="sitemap-section">
+        <h2>Propiedades recientes</h2>
+        <ul>
+          {% for product in collections.all.products limit: 20 %}
+            <li>
+              <a href="{{ product.url }}">{{ product.title }}</a>
+              {% if product.metafields.custom.location %}
+                <span class="property-location">- {{ product.metafields.custom.location }}</span>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+        {% if collections.all.products_count > 20 %}
+          <p><a href="{{ collections.all.url }}">Ver todas las propiedades ({{ collections.all.products_count }} total)</a></p>
+        {% endif %}
+      </div>
+
+      <div class="sitemap-section">
+        <h2>Páginas adicionales</h2>
+        <ul>
+          {% for page in pages %}
+            {% unless page.handle == 'sitemap' %}
+              <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+            {% endunless %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sitemap-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .sitemap-section h2 {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .sitemap-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sitemap-section li {
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .sitemap-section li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+  }
+
+  .sitemap-section a {
+    text-decoration: none;
+    color: var(--color-text-dark);
+  }
+
+  .sitemap-section a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .property-count,
+  .property-location {
+    font-size: 0.9em;
+    color: var(--color-text-light);
+  }
+</style>

@@ -1,0 +1,267 @@
+{% comment %}
+  Testimonials Section
+  Displays customer reviews in a responsive card layout
+{% endcomment %}
+
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    {% assign testimonials_title = section.settings.testimonials_title | default: settings.testimonials_title %}
+    {% if testimonials_title != blank %}
+      <h2 class="testimonials__title">{{ testimonials_title }}</h2>
+    {% endif %}
+    
+    {% assign testimonials_subtitle = section.settings.testimonials_subtitle | default: settings.testimonials_subtitle %}
+    {% if testimonials_subtitle != blank %}
+      <p class="testimonials__subtitle">{{ testimonials_subtitle }}</p>
+    {% endif %}
+
+    <div class="testimonials__grid">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'testimonial_card' %}
+              <div class="testimonial-card" {{ block.shopify_attributes }}>
+                {% if block.settings.rating and block.settings.rating > 0 %}
+                  <div class="testimonial-card__rating">
+                    {% for i in (1..5) %}
+                      {% if i <= block.settings.rating %}
+                        <span class="star star--filled">★</span>
+                      {% else %}
+                        <span class="star star--empty">☆</span>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                {% endif %}
+                
+                {% if block.settings.testimonial != blank %}
+                  <blockquote class="testimonial-card__quote">
+                    "{{ block.settings.testimonial }}"
+                  </blockquote>
+                {% endif %}
+                
+                <div class="testimonial-card__author">
+                  {% if block.settings.customer_photo != blank %}
+                    <div class="testimonial-card__photo">
+                      <img src="{{ block.settings.customer_photo | img_url: '80x80' }}" 
+                           alt="{{ block.settings.customer_name | escape }}"
+                           loading="lazy">
+                    </div>
+                  {% endif %}
+                  
+                  <div class="testimonial-card__info">
+                    {% if block.settings.customer_name != blank %}
+                      <cite class="testimonial-card__name">{{ block.settings.customer_name }}</cite>
+                    {% endif %}
+                    
+                    {% if block.settings.customer_location != blank %}
+                      <span class="testimonial-card__location">{{ block.settings.customer_location }}</span>
+                    {% endif %}
+                    
+                    {% if block.settings.property_type != blank %}
+                      <span class="testimonial-card__property">{{ block.settings.property_type }}</span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+          {% endcase %}
+        {% endfor %}
+      {% else %}
+        <!-- Default testimonials from theme settings -->
+        {% if settings.testimonial_1_text != blank %}
+          <div class="testimonial-card">
+            <div class="testimonial-card__rating">
+              {% for i in (1..5) %}
+                <span class="star star--filled">★</span>
+              {% endfor %}
+            </div>
+            <blockquote class="testimonial-card__quote">
+              "{{ settings.testimonial_1_text }}"
+            </blockquote>
+            <div class="testimonial-card__author">
+              {% if settings.testimonial_1_image != blank %}
+                <div class="testimonial-card__photo">
+                  <img src="{{ settings.testimonial_1_image | img_url: '80x80' }}" 
+                       alt="{{ settings.testimonial_1_author | escape }}"
+                       loading="lazy">
+                </div>
+              {% endif %}
+              <div class="testimonial-card__info">
+                {% if settings.testimonial_1_author != blank %}
+                  <cite class="testimonial-card__name">{{ settings.testimonial_1_author }}</cite>
+                {% endif %}
+                {% if settings.testimonial_1_location != blank %}
+                  <span class="testimonial-card__location">{{ settings.testimonial_1_location }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        
+        {% if settings.testimonial_2_text != blank %}
+          <div class="testimonial-card">
+            <div class="testimonial-card__rating">
+              {% for i in (1..5) %}
+                <span class="star star--filled">★</span>
+              {% endfor %}
+            </div>
+            <blockquote class="testimonial-card__quote">
+              "{{ settings.testimonial_2_text }}"
+            </blockquote>
+            <div class="testimonial-card__author">
+              {% if settings.testimonial_2_image != blank %}
+                <div class="testimonial-card__photo">
+                  <img src="{{ settings.testimonial_2_image | img_url: '80x80' }}" 
+                       alt="{{ settings.testimonial_2_author | escape }}"
+                       loading="lazy">
+                </div>
+              {% endif %}
+              <div class="testimonial-card__info">
+                {% if settings.testimonial_2_author != blank %}
+                  <cite class="testimonial-card__name">{{ settings.testimonial_2_author }}</cite>
+                {% endif %}
+                {% if settings.testimonial_2_location != blank %}
+                  <span class="testimonial-card__location">{{ settings.testimonial_2_location }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        
+        {% if settings.testimonial_3_text != blank %}
+          <div class="testimonial-card">
+            <div class="testimonial-card__rating">
+              {% for i in (1..5) %}
+                <span class="star star--filled">★</span>
+              {% endfor %}
+            </div>
+            <blockquote class="testimonial-card__quote">
+              "{{ settings.testimonial_3_text }}"
+            </blockquote>
+            <div class="testimonial-card__author">
+              {% if settings.testimonial_3_image != blank %}
+                <div class="testimonial-card__photo">
+                  <img src="{{ settings.testimonial_3_image | img_url: '80x80' }}" 
+                       alt="{{ settings.testimonial_3_author | escape }}"
+                       loading="lazy">
+                </div>
+              {% endif %}
+              <div class="testimonial-card__info">
+                {% if settings.testimonial_3_author != blank %}
+                  <cite class="testimonial-card__name">{{ settings.testimonial_3_author }}</cite>
+                {% endif %}
+                {% if settings.testimonial_3_location != blank %}
+                  <span class="testimonial-card__location">{{ settings.testimonial_3_location }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials Section",
+  "tag": "section",
+  "class": "testimonials-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "testimonials_title",
+      "label": "Section Title",
+      "default": "Lo que dicen nuestros clientes"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonials_subtitle",
+      "label": "Section Subtitle",
+      "default": "Conoce las experiencias de quienes ya encontraron su hogar ideal con nosotros"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial_card",
+      "name": "Testimonial Card",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "testimonial",
+          "label": "Customer Testimonial",
+          "default": "Excelente servicio y atención personalizada. Nos ayudaron a encontrar la casa perfecta para nuestra familia."
+        },
+        {
+          "type": "text",
+          "id": "customer_name",
+          "label": "Customer Name",
+          "default": "María González"
+        },
+        {
+          "type": "text",
+          "id": "customer_location",
+          "label": "Customer Location",
+          "default": "Zona Norte"
+        },
+        {
+          "type": "text",
+          "id": "property_type",
+          "label": "Property Type Purchased",
+          "default": "Casa de 3 recámaras"
+        },
+        {
+          "type": "image_picker",
+          "id": "customer_photo",
+          "label": "Customer Photo (Optional)"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials Section",
+      "blocks": [
+        {
+          "type": "testimonial_card",
+          "settings": {
+            "testimonial": "Excelente servicio y atención personalizada. Nos ayudaron a encontrar la casa perfecta para nuestra familia. El proceso fue muy transparente y siempre nos mantuvieron informados.",
+            "customer_name": "María González",
+            "customer_location": "Zona Norte",
+            "property_type": "Casa de 3 recámaras",
+            "rating": 5
+          }
+        },
+        {
+          "type": "testimonial_card",
+          "settings": {
+            "testimonial": "Profesionales de primera. Me asesoraron durante todo el proceso de venta de mi departamento. Lograron venderlo en tiempo récord y al precio que esperaba.",
+            "customer_name": "Carlos Rodríguez",
+            "customer_location": "Centro",
+            "property_type": "Departamento",
+            "rating": 5
+          }
+        },
+        {
+          "type": "testimonial_card",
+          "settings": {
+            "testimonial": "Muy recomendable. Su conocimiento del mercado inmobiliario es excepcional. Nos ayudaron a encontrar el terreno ideal para construir nuestro hogar.",
+            "customer_name": "Ana y Roberto Martínez",
+            "customer_location": "Zona Sur",
+            "property_type": "Terreno residencial",
+            "rating": 5
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

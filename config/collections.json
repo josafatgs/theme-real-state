@@ -1,0 +1,151 @@
+{
+  "collections": {
+    "propiedades": {
+      "handle": "propiedades",
+      "title": "Todas las Propiedades",
+      "description": "Colección principal que contiene todas las propiedades disponibles",
+      "sort_order": "manual",
+      "published": true,
+      "rules": [
+        {
+          "column": "type",
+          "relation": "equals",
+          "condition": "product"
+        }
+      ]
+    },
+    "casas": {
+      "handle": "casas",
+      "title": "Casas",
+      "description": "Casas unifamiliares y residenciales disponibles para venta o renta",
+      "sort_order": "price-ascending",
+      "published": true,
+      "rules": [
+        {
+          "column": "tag",
+          "relation": "equals",
+          "condition": "casa"
+        }
+      ]
+    },
+    "departamentos": {
+      "handle": "departamentos",
+      "title": "Departamentos",
+      "description": "Departamentos y condominios disponibles para venta o renta",
+      "sort_order": "price-ascending",
+      "published": true,
+      "rules": [
+        {
+          "column": "tag",
+          "relation": "equals",
+          "condition": "departamento"
+        }
+      ]
+    },
+    "terrenos": {
+      "handle": "terrenos",
+      "title": "Terrenos",
+      "description": "Terrenos y lotes disponibles para desarrollo o construcción",
+      "sort_order": "price-ascending",
+      "published": true,
+      "rules": [
+        {
+          "column": "tag",
+          "relation": "equals",
+          "condition": "terreno"
+        }
+      ]
+    },
+    "comerciales": {
+      "handle": "comerciales",
+      "title": "Propiedades Comerciales",
+      "description": "Locales comerciales, oficinas y espacios para negocio",
+      "sort_order": "price-ascending",
+      "published": true,
+      "rules": [
+        {
+          "column": "tag",
+          "relation": "equals",
+          "condition": "local_comercial"
+        },
+        {
+          "column": "tag",
+          "relation": "equals",
+          "condition": "oficina"
+        },
+        {
+          "column": "tag",
+          "relation": "equals",
+          "condition": "bodega"
+        }
+      ]
+    },
+    "venta": {
+      "handle": "venta",
+      "title": "Propiedades en Venta",
+      "description": "Todas las propiedades disponibles para compra",
+      "sort_order": "price-ascending",
+      "published": true,
+      "rules": [
+        {
+          "column": "tag",
+          "relation": "equals",
+          "condition": "venta"
+        }
+      ]
+    },
+    "renta": {
+      "handle": "renta",
+      "title": "Propiedades en Renta",
+      "description": "Todas las propiedades disponibles para renta",
+      "sort_order": "price-ascending",
+      "published": true,
+      "rules": [
+        {
+          "column": "tag",
+          "relation": "equals",
+          "condition": "renta"
+        }
+      ]
+    },
+    "destacadas": {
+      "handle": "destacadas",
+      "title": "Propiedades Destacadas",
+      "description": "Propiedades seleccionadas y destacadas por nuestro equipo",
+      "sort_order": "manual",
+      "published": true,
+      "rules": [
+        {
+          "column": "tag",
+          "relation": "equals",
+          "condition": "destacada"
+        }
+      ]
+    },
+    "nuevas": {
+      "handle": "nuevas",
+      "title": "Propiedades Nuevas",
+      "description": "Propiedades recién agregadas al catálogo",
+      "sort_order": "created-descending",
+      "published": true,
+      "rules": [
+        {
+          "column": "created_at",
+          "relation": "greater_than",
+          "condition": "{{ 'now' | date: '%s' | minus: 2592000 }}"
+        }
+      ]
+    }
+  },
+  "collection_templates": {
+    "propiedades": "collection.liquid",
+    "casas": "collection.liquid",
+    "departamentos": "collection.liquid",
+    "terrenos": "collection.liquid",
+    "comerciales": "collection.liquid",
+    "venta": "collection.liquid",
+    "renta": "collection.liquid",
+    "destacadas": "collection.liquid",
+    "nuevas": "collection.liquid"
+  }
+}

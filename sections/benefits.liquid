@@ -1,0 +1,179 @@
+{% comment %}
+  Benefits/Features Section
+  Displays 3-4 benefit cards with icons in a responsive grid layout
+{% endcomment %}
+
+<section class="benefits" id="benefits">
+  <div class="container">
+    {% assign benefits_title = section.settings.benefits_title | default: settings.benefits_title %}
+    {% if benefits_title != blank %}
+      <h2 class="benefits__title">{{ benefits_title }}</h2>
+    {% endif %}
+    
+    {% assign benefits_subtitle = section.settings.benefits_subtitle | default: settings.benefits_subtitle %}
+    {% if benefits_subtitle != blank %}
+      <p class="benefits__subtitle">{{ benefits_subtitle }}</p>
+    {% endif %}
+
+    <div class="benefits__grid">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'benefit_card' %}
+              <div class="benefit-card" {{ block.shopify_attributes }}>
+                {% if block.settings.icon != blank %}
+                  <div class="benefit-card__icon">
+                    {{ block.settings.icon }}
+                  </div>
+                {% endif %}
+                
+                {% if block.settings.title != blank %}
+                  <h3 class="benefit-card__title">{{ block.settings.title }}</h3>
+                {% endif %}
+                
+                {% if block.settings.description != blank %}
+                  <p class="benefit-card__description">{{ block.settings.description }}</p>
+                {% endif %}
+              </div>
+          {% endcase %}
+        {% endfor %}
+      {% else %}
+        <!-- Default benefits from theme settings -->
+        {% if settings.benefit_1_title != blank %}
+          <div class="benefit-card">
+            {% if settings.benefit_1_icon != blank %}
+              <div class="benefit-card__icon {{ settings.benefit_1_icon }}"></div>
+            {% endif %}
+            <h3 class="benefit-card__title">{{ settings.benefit_1_title }}</h3>
+            {% if settings.benefit_1_description != blank %}
+              <p class="benefit-card__description">{{ settings.benefit_1_description }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+        
+        {% if settings.benefit_2_title != blank %}
+          <div class="benefit-card">
+            {% if settings.benefit_2_icon != blank %}
+              <div class="benefit-card__icon {{ settings.benefit_2_icon }}"></div>
+            {% endif %}
+            <h3 class="benefit-card__title">{{ settings.benefit_2_title }}</h3>
+            {% if settings.benefit_2_description != blank %}
+              <p class="benefit-card__description">{{ settings.benefit_2_description }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+        
+        {% if settings.benefit_3_title != blank %}
+          <div class="benefit-card">
+            {% if settings.benefit_3_icon != blank %}
+              <div class="benefit-card__icon {{ settings.benefit_3_icon }}"></div>
+            {% endif %}
+            <h3 class="benefit-card__title">{{ settings.benefit_3_title }}</h3>
+            {% if settings.benefit_3_description != blank %}
+              <p class="benefit-card__description">{{ settings.benefit_3_description }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+        
+        {% if settings.benefit_4_title != blank %}
+          <div class="benefit-card">
+            {% if settings.benefit_4_icon != blank %}
+              <div class="benefit-card__icon {{ settings.benefit_4_icon }}"></div>
+            {% endif %}
+            <h3 class="benefit-card__title">{{ settings.benefit_4_title }}</h3>
+            {% if settings.benefit_4_description != blank %}
+              <p class="benefit-card__description">{{ settings.benefit_4_description }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Benefits Section",
+  "tag": "section",
+  "class": "benefits-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "benefits_title",
+      "label": "Section Title",
+      "default": "¿Por qué elegirnos?"
+    },
+    {
+      "type": "textarea",
+      "id": "benefits_subtitle",
+      "label": "Section Subtitle",
+      "default": "Descubre las ventajas de trabajar con nosotros"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit_card",
+      "name": "Benefit Card",
+      "settings": [
+        {
+          "type": "html",
+          "id": "icon",
+          "label": "Icon (SVG)",
+          "info": "Add SVG icon code here"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Benefit Title",
+          "default": "Benefit Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Benefit Description",
+          "default": "Description of the benefit"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits Section",
+      "blocks": [
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "<svg width=\"48\" height=\"48\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z\" fill=\"currentColor\"/></svg>",
+            "title": "Experiencia Comprobada",
+            "description": "Más de 10 años ayudando a familias a encontrar su hogar ideal"
+          }
+        },
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "<svg width=\"48\" height=\"48\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5V9M15 11.5C15.8 11.5 16.5 12.2 16.5 13S15.8 14.5 15 14.5 13.5 13.8 13.5 13 14.2 11.5 15 11.5M5 7V9L11 8.5V7L5 7Z\" fill=\"currentColor\"/></svg>",
+            "title": "Asesoría Personalizada",
+            "description": "Te acompañamos en cada paso del proceso de compra o venta"
+          }
+        },
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "<svg width=\"48\" height=\"48\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 2L2 7L12 12L22 7L12 2Z\" fill=\"currentColor\"/><polyline points=\"2,17 12,22 22,17\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><polyline points=\"2,12 12,17 22,12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg>",
+            "title": "Amplio Portafolio",
+            "description": "Contamos con una gran variedad de propiedades en las mejores ubicaciones"
+          }
+        },
+        {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "<svg width=\"48\" height=\"48\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M9 12L11 14L15 10M21 12C21 16.97 16.97 21 12 21C7.03 21 3 16.97 3 12C3 7.03 7.03 3 12 3C16.97 3 21 7.03 21 12Z\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/></svg>",
+            "title": "Garantía de Confianza",
+            "description": "Procesos transparentes y seguros respaldados por nuestra reputación"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,322 @@
+{{ 'section-header.css' | asset_url | stylesheet_tag }}
+
+<header class="header" role="banner">
+  <div class="header__container">
+    <!-- Logo/Brand -->
+    <div class="header__logo">
+      <a href="{{ routes.root_url }}" class="header__logo-link">
+        {%- if settings.logo != blank -%}
+          <img src="{{ settings.logo | image_url: width: 200 }}" 
+               alt="{{ shop.name }}" 
+               class="header__logo-img"
+               width="200"
+               height="auto">
+        {%- else -%}
+          <span class="header__logo-text">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="header__nav desktop-nav" role="navigation" aria-label="Navegación principal">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="{{ routes.root_url }}" class="nav-link {% if request.page_type == 'index' %}nav-link--active{% endif %}">
+            Inicio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ collections.propiedades.url | default: '/collections/propiedades' }}" 
+             class="nav-link {% if request.page_type == 'collection' %}nav-link--active{% endif %}">
+            Propiedades
+          </a>
+        </li>
+        <li class="nav-item nav-item--dropdown">
+          <button class="nav-link nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            Tipos
+            <svg class="nav-dropdown-icon" width="12" height="8" viewBox="0 0 12 8" fill="none">
+              <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="nav-dropdown">
+            <li><a href="{{ collections.casas.url | default: '/collections/casas' }}" class="nav-dropdown-link">Casas</a></li>
+            <li><a href="{{ collections.departamentos.url | default: '/collections/departamentos' }}" class="nav-dropdown-link">Departamentos</a></li>
+            <li><a href="{{ collections.terrenos.url | default: '/collections/terrenos' }}" class="nav-dropdown-link">Terrenos</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#contact-form" class="nav-link">Contacto</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Contact Info -->
+    <div class="header__contact desktop-only">
+      {%- if settings.phone_number != blank -%}
+        <a href="tel:{{ settings.phone_number }}" class="header__contact-link">
+          <svg class="header__contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          {{ settings.phone_number }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="header__menu-toggle mobile-only" 
+            aria-label="Abrir menú de navegación" 
+            aria-expanded="false"
+            aria-controls="mobile-menu">
+      <span class="hamburger">
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+      </span>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobile-menu" role="navigation" aria-label="Navegación móvil">
+    <div class="mobile-nav__overlay"></div>
+    <div class="mobile-nav__content">
+      <div class="mobile-nav__header">
+        <div class="mobile-nav__logo">
+          {%- if settings.logo != blank -%}
+            <img src="{{ settings.logo | image_url: width: 150 }}" 
+                 alt="{{ shop.name }}" 
+                 class="mobile-nav__logo-img"
+                 width="150"
+                 height="auto">
+          {%- else -%}
+            <span class="mobile-nav__logo-text">{{ shop.name }}</span>
+          {%- endif -%}
+        </div>
+        <button class="mobile-nav__close" aria-label="Cerrar menú">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <ul class="mobile-nav__list">
+        <li class="mobile-nav__item">
+          <a href="{{ routes.root_url }}" class="mobile-nav__link">Inicio</a>
+        </li>
+        <li class="mobile-nav__item">
+          <a href="{{ collections.propiedades.url | default: '/collections/propiedades' }}" class="mobile-nav__link">
+            Todas las Propiedades
+          </a>
+        </li>
+        <li class="mobile-nav__item mobile-nav__item--expandable">
+          <button class="mobile-nav__link mobile-nav__toggle" aria-expanded="false">
+            Tipos de Propiedades
+            <svg class="mobile-nav__toggle-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="mobile-nav__submenu">
+            <li><a href="{{ collections.casas.url | default: '/collections/casas' }}" class="mobile-nav__sublink">Casas</a></li>
+            <li><a href="{{ collections.departamentos.url | default: '/collections/departamentos' }}" class="mobile-nav__sublink">Departamentos</a></li>
+            <li><a href="{{ collections.terrenos.url | default: '/collections/terrenos' }}" class="mobile-nav__sublink">Terrenos</a></li>
+          </ul>
+        </li>
+        <li class="mobile-nav__item">
+          <a href="#contact-form" class="mobile-nav__link">Contacto</a>
+        </li>
+      </ul>
+
+      <div class="mobile-nav__contact">
+        {%- if settings.phone_number != blank -%}
+          <a href="tel:{{ settings.phone_number }}" class="mobile-nav__contact-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Llamar Ahora
+          </a>
+        {%- endif -%}
+        
+        {%- if settings.whatsapp_number != blank -%}
+          <a href="https://wa.me/{{ settings.whatsapp_number }}?text={{ settings.whatsapp_message | url_encode }}" 
+             target="_blank" 
+             class="mobile-nav__contact-btn mobile-nav__contact-btn--whatsapp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" fill="currentColor"/>
+            </svg>
+            WhatsApp
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Header functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('.header');
+    const mobileToggle = document.querySelector('.header__menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const mobileClose = document.querySelector('.mobile-nav__close');
+    const mobileOverlay = document.querySelector('.mobile-nav__overlay');
+    const mobileToggles = document.querySelectorAll('.mobile-nav__toggle');
+    const desktopDropdownToggles = document.querySelectorAll('.nav-dropdown-toggle');
+
+    // Mobile menu toggle
+    if (mobileToggle && mobileNav) {
+      mobileToggle.addEventListener('click', function() {
+        const isOpen = mobileNav.classList.contains('mobile-nav--open');
+        
+        if (isOpen) {
+          closeMobileMenu();
+        } else {
+          openMobileMenu();
+        }
+      });
+    }
+
+    // Mobile menu close
+    if (mobileClose) {
+      mobileClose.addEventListener('click', closeMobileMenu);
+    }
+
+    // Mobile overlay close
+    if (mobileOverlay) {
+      mobileOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // Mobile submenu toggles
+    mobileToggles.forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const submenu = this.nextElementSibling;
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        
+        // Close other submenus
+        mobileToggles.forEach(otherToggle => {
+          if (otherToggle !== this) {
+            otherToggle.setAttribute('aria-expanded', 'false');
+            otherToggle.nextElementSibling.style.maxHeight = '0';
+          }
+        });
+        
+        // Toggle current submenu
+        this.setAttribute('aria-expanded', !isExpanded);
+        if (!isExpanded) {
+          submenu.style.maxHeight = submenu.scrollHeight + 'px';
+        } else {
+          submenu.style.maxHeight = '0';
+        }
+      });
+    });
+
+    // Desktop dropdown functionality
+    desktopDropdownToggles.forEach(toggle => {
+      const dropdown = toggle.nextElementSibling;
+      
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        
+        // Close other dropdowns
+        desktopDropdownToggles.forEach(otherToggle => {
+          if (otherToggle !== this) {
+            otherToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        // Toggle current dropdown
+        this.setAttribute('aria-expanded', !isExpanded);
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Sticky header on scroll
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', function() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      if (scrollTop > 100) {
+        header.classList.add('header--scrolled');
+      } else {
+        header.classList.remove('header--scrolled');
+      }
+      
+      // Hide header on scroll down, show on scroll up
+      if (scrollTop > lastScrollTop && scrollTop > 200) {
+        header.classList.add('header--hidden');
+      } else {
+        header.classList.remove('header--hidden');
+      }
+      
+      lastScrollTop = scrollTop;
+    });
+
+    // Close mobile menu on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && mobileNav.classList.contains('mobile-nav--open')) {
+        closeMobileMenu();
+      }
+    });
+
+    // Close mobile menu on link click
+    const mobileLinks = document.querySelectorAll('.mobile-nav__link:not(.mobile-nav__toggle), .mobile-nav__sublink');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        if (this.getAttribute('href').startsWith('#')) {
+          closeMobileMenu();
+        }
+      });
+    });
+
+    function openMobileMenu() {
+      mobileNav.classList.add('mobile-nav--open');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('mobile-nav-open');
+      
+      // Focus management
+      const firstFocusable = mobileNav.querySelector('button, a');
+      if (firstFocusable) {
+        firstFocusable.focus();
+      }
+    }
+
+    function closeMobileMenu() {
+      mobileNav.classList.remove('mobile-nav--open');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('mobile-nav-open');
+      
+      // Reset submenus
+      mobileToggles.forEach(toggle => {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.nextElementSibling.style.maxHeight = '0';
+      });
+      
+      // Return focus to toggle button
+      mobileToggle.focus();
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Número de teléfono",
+      "info": "Formato: +52 123 456 7890"
+    }
+  ]
+}
+{% endschema %}

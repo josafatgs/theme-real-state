@@ -1,0 +1,106 @@
+{% comment %}
+  Hero Section Component
+  Displays hero image with overlay content and CTA button
+{% endcomment %}
+
+<section class="hero" id="hero" role="banner" aria-labelledby="hero-title">
+  <div class="hero__background">
+    {% assign hero_image = section.settings.hero_image | default: settings.hero_background_image %}
+    {% if hero_image %}
+      <img 
+        src="{{ hero_image | img_url: '1920x1080' }}" 
+        srcset="{{ hero_image | img_url: '480x270' }} 480w,
+                {{ hero_image | img_url: '768x432' }} 768w,
+                {{ hero_image | img_url: '1024x576' }} 1024w,
+                {{ hero_image | img_url: '1440x810' }} 1440w,
+                {{ hero_image | img_url: '1920x1080' }} 1920w,
+                {{ hero_image | img_url: '2560x1440' }} 2560w"
+        sizes="100vw"
+        alt="{{ hero_image.alt | default: 'Hero Image' | escape }}"
+        class="hero__image"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+        width="1920"
+        height="1080"
+      >
+    {% else %}
+      <div class="hero__placeholder" role="img" aria-label="Imagen de fondo predeterminada"></div>
+    {% endif %}
+    <div class="hero__overlay" aria-hidden="true" style="opacity: {{ settings.hero_overlay_opacity | default: 40 | divided_by: 100.0 }};"></div>
+  </div>
+  
+  <div class="hero__content hero__content--{{ settings.hero_text_alignment | default: 'center' }}">
+    <div class="container">
+      <h1 class="hero__title" id="hero-title">
+        {{ section.settings.hero_title | default: settings.hero_title | default: 'Encuentra la casa de tus sueños' }}
+      </h1>
+      
+      {% assign hero_subtitle = section.settings.hero_subtitle | default: settings.hero_subtitle %}
+      {% if hero_subtitle != blank %}
+        <p class="hero__subtitle">
+          {{ hero_subtitle }}
+        </p>
+      {% endif %}
+      
+      <div class="hero__cta">
+        <a 
+          href="{{ section.settings.cta_link | default: settings.hero_cta_link | default: '#contact-form' }}" 
+          class="btn btn--primary btn--large"
+          aria-describedby="hero-title"
+        >
+          {{ section.settings.cta_text | default: settings.hero_cta_text | default: 'Comenzar búsqueda' }}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "tag": "section",
+  "class": "hero-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image",
+      "info": "Recommended size: 1920x1080px"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "Encuentra la casa de tus sueños",
+      "info": "Main headline displayed on the hero section"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Hero Subtitle",
+      "default": "Descubre las mejores propiedades en las ubicaciones más exclusivas",
+      "info": "Supporting text below the main title"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Comenzar búsqueda",
+      "info": "Text displayed on the call-to-action button"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Button Link",
+      "default": "#contact-form",
+      "info": "Where the CTA button should link to"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Section"
+    }
+  ]
+}
+{% endschema %}

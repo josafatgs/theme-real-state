@@ -1,0 +1,313 @@
+{
+  "tagging_system": {
+    "property_types": {
+      "description": "Tags para clasificar el tipo de propiedad",
+      "tags": [
+        {
+          "tag": "casa",
+          "display_name": "Casa",
+          "description": "Casa unifamiliar o residencial"
+        },
+        {
+          "tag": "departamento",
+          "display_name": "Departamento",
+          "description": "Departamento o condominio"
+        },
+        {
+          "tag": "terreno",
+          "display_name": "Terreno",
+          "description": "Terreno o lote para construcción"
+        },
+        {
+          "tag": "local_comercial",
+          "display_name": "Local Comercial",
+          "description": "Local para uso comercial"
+        },
+        {
+          "tag": "oficina",
+          "display_name": "Oficina",
+          "description": "Espacio de oficina"
+        },
+        {
+          "tag": "bodega",
+          "display_name": "Bodega",
+          "description": "Bodega o almacén"
+        }
+      ]
+    },
+    "transaction_types": {
+      "description": "Tags para el tipo de transacción",
+      "tags": [
+        {
+          "tag": "venta",
+          "display_name": "Venta",
+          "description": "Propiedad disponible para compra"
+        },
+        {
+          "tag": "renta",
+          "display_name": "Renta",
+          "description": "Propiedad disponible para renta"
+        }
+      ]
+    },
+    "price_ranges": {
+      "description": "Tags para rangos de precio (en pesos mexicanos)",
+      "tags": [
+        {
+          "tag": "precio-0-500000",
+          "display_name": "Hasta $500,000",
+          "description": "Propiedades hasta $500,000 MXN",
+          "min_price": 0,
+          "max_price": 500000
+        },
+        {
+          "tag": "precio-500000-1000000",
+          "display_name": "$500,000 - $1,000,000",
+          "description": "Propiedades entre $500,000 y $1,000,000 MXN",
+          "min_price": 500000,
+          "max_price": 1000000
+        },
+        {
+          "tag": "precio-1000000-2000000",
+          "display_name": "$1,000,000 - $2,000,000",
+          "description": "Propiedades entre $1,000,000 y $2,000,000 MXN",
+          "min_price": 1000000,
+          "max_price": 2000000
+        },
+        {
+          "tag": "precio-2000000-5000000",
+          "display_name": "$2,000,000 - $5,000,000",
+          "description": "Propiedades entre $2,000,000 y $5,000,000 MXN",
+          "min_price": 2000000,
+          "max_price": 5000000
+        },
+        {
+          "tag": "precio-5000000-plus",
+          "display_name": "Más de $5,000,000",
+          "description": "Propiedades de más de $5,000,000 MXN",
+          "min_price": 5000000,
+          "max_price": null
+        }
+      ]
+    },
+    "locations": {
+      "description": "Tags para ubicaciones (usar formato ubicacion-nombre-zona)",
+      "prefix": "ubicacion-",
+      "examples": [
+        {
+          "tag": "ubicacion-centro",
+          "display_name": "Centro",
+          "description": "Zona centro de la ciudad"
+        },
+        {
+          "tag": "ubicacion-zona-norte",
+          "display_name": "Zona Norte",
+          "description": "Zona norte de la ciudad"
+        },
+        {
+          "tag": "ubicacion-zona-sur",
+          "display_name": "Zona Sur",
+          "description": "Zona sur de la ciudad"
+        },
+        {
+          "tag": "ubicacion-zona-este",
+          "display_name": "Zona Este",
+          "description": "Zona este de la ciudad"
+        },
+        {
+          "tag": "ubicacion-zona-oeste",
+          "display_name": "Zona Oeste",
+          "description": "Zona oeste de la ciudad"
+        },
+        {
+          "tag": "ubicacion-residencial-campestre",
+          "display_name": "Residencial Campestre",
+          "description": "Zona residencial campestre"
+        },
+        {
+          "tag": "ubicacion-colonia-del-valle",
+          "display_name": "Colonia del Valle",
+          "description": "Colonia del Valle"
+        },
+        {
+          "tag": "ubicacion-lomas-de-chapultepec",
+          "display_name": "Lomas de Chapultepec",
+          "description": "Lomas de Chapultepec"
+        }
+      ]
+    },
+    "bedrooms": {
+      "description": "Tags para número de recámaras",
+      "tags": [
+        {
+          "tag": "recamaras-1",
+          "display_name": "1 Recámara",
+          "description": "Propiedades con 1 recámara"
+        },
+        {
+          "tag": "recamaras-2",
+          "display_name": "2 Recámaras",
+          "description": "Propiedades con 2 recámaras"
+        },
+        {
+          "tag": "recamaras-3",
+          "display_name": "3 Recámaras",
+          "description": "Propiedades con 3 recámaras"
+        },
+        {
+          "tag": "recamaras-4",
+          "display_name": "4 Recámaras",
+          "description": "Propiedades con 4 recámaras"
+        },
+        {
+          "tag": "recamaras-5-plus",
+          "display_name": "5+ Recámaras",
+          "description": "Propiedades con 5 o más recámaras"
+        }
+      ]
+    },
+    "property_status": {
+      "description": "Tags para el estado de la propiedad",
+      "tags": [
+        {
+          "tag": "disponible",
+          "display_name": "Disponible",
+          "description": "Propiedad disponible"
+        },
+        {
+          "tag": "vendida",
+          "display_name": "Vendida",
+          "description": "Propiedad vendida"
+        },
+        {
+          "tag": "rentada",
+          "display_name": "Rentada",
+          "description": "Propiedad rentada"
+        },
+        {
+          "tag": "en_proceso",
+          "display_name": "En Proceso",
+          "description": "Propiedad en proceso de venta/renta"
+        },
+        {
+          "tag": "reservada",
+          "display_name": "Reservada",
+          "description": "Propiedad reservada"
+        }
+      ]
+    },
+    "special_features": {
+      "description": "Tags para características especiales",
+      "tags": [
+        {
+          "tag": "destacada",
+          "display_name": "Destacada",
+          "description": "Propiedad destacada"
+        },
+        {
+          "tag": "nueva",
+          "display_name": "Nueva",
+          "description": "Propiedad nueva en el catálogo"
+        },
+        {
+          "tag": "precio-reducido",
+          "display_name": "Precio Reducido",
+          "description": "Propiedad con precio reducido"
+        },
+        {
+          "tag": "oportunidad",
+          "display_name": "Oportunidad",
+          "description": "Oportunidad de inversión"
+        },
+        {
+          "tag": "exclusiva",
+          "display_name": "Exclusiva",
+          "description": "Propiedad exclusiva"
+        }
+      ]
+    }
+  },
+  "auto_tagging_rules": {
+    "description": "Reglas para aplicar tags automáticamente basado en metafields",
+    "rules": [
+      {
+        "condition": "metafield_equals",
+        "metafield": "custom.property_type",
+        "value": "casa",
+        "apply_tag": "casa"
+      },
+      {
+        "condition": "metafield_equals",
+        "metafield": "custom.property_type",
+        "value": "departamento",
+        "apply_tag": "departamento"
+      },
+      {
+        "condition": "metafield_equals",
+        "metafield": "custom.property_type",
+        "value": "terreno",
+        "apply_tag": "terreno"
+      },
+      {
+        "condition": "price_range",
+        "min_price": 0,
+        "max_price": 500000,
+        "apply_tag": "precio-0-500000"
+      },
+      {
+        "condition": "price_range",
+        "min_price": 500000,
+        "max_price": 1000000,
+        "apply_tag": "precio-500000-1000000"
+      },
+      {
+        "condition": "price_range",
+        "min_price": 1000000,
+        "max_price": 2000000,
+        "apply_tag": "precio-1000000-2000000"
+      },
+      {
+        "condition": "price_range",
+        "min_price": 2000000,
+        "max_price": 5000000,
+        "apply_tag": "precio-2000000-5000000"
+      },
+      {
+        "condition": "price_range",
+        "min_price": 5000000,
+        "max_price": null,
+        "apply_tag": "precio-5000000-plus"
+      },
+      {
+        "condition": "metafield_equals",
+        "metafield": "custom.bedrooms",
+        "value": "1",
+        "apply_tag": "recamaras-1"
+      },
+      {
+        "condition": "metafield_equals",
+        "metafield": "custom.bedrooms",
+        "value": "2",
+        "apply_tag": "recamaras-2"
+      },
+      {
+        "condition": "metafield_equals",
+        "metafield": "custom.bedrooms",
+        "value": "3",
+        "apply_tag": "recamaras-3"
+      },
+      {
+        "condition": "metafield_equals",
+        "metafield": "custom.bedrooms",
+        "value": "4",
+        "apply_tag": "recamaras-4"
+      },
+      {
+        "condition": "metafield_greater_than",
+        "metafield": "custom.bedrooms",
+        "value": "4",
+        "apply_tag": "recamaras-5-plus"
+      }
+    ]
+  }
+}

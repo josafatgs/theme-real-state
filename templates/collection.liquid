@@ -1,0 +1,324 @@
+{% comment %}
+  Collection Template - Property Listings
+  
+  This template displays a grid of properties using the property-card component.
+  Includes filtering, pagination, and responsive layout.
+{% endcomment %}
+
+<div class="collection-page">
+  <div class="container">
+    
+    <!-- Collection Header -->
+    <div class="collection-header">
+      <h1 class="collection-title">{{ collection.title }}</h1>
+      {% if collection.description != blank %}
+        <div class="collection-description">
+          {{ collection.description }}
+        </div>
+      {% endif %}
+      
+      <div class="collection-meta">
+        <p class="collection-count">
+          {% if collection.products_count == 1 %}
+            {{ collection.products_count }} propiedad encontrada
+          {% else %}
+            {{ collection.products_count }} propiedades encontradas
+          {% endif %}
+        </p>
+      </div>
+    </div>
+
+    <!-- Collection Content -->
+    <div class="collection-content">
+      
+      <!-- Filter Sidebar -->
+      <aside class="collection-sidebar">
+        <div class="collection-filters">
+          <div class="filters-header">
+            <h3 class="filters-title">Filtrar propiedades</h3>
+            <div class="filters-actions">
+              <button type="button" class="filters-clear" id="clear-filters" style="display: none;">
+                Limpiar filtros
+              </button>
+              <button type="button" class="filters-close" id="mobile-filters-close">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Property Type Filter -->
+          <div class="filter-group">
+            <h4 class="filter-title">Tipo de propiedad</h4>
+            <div class="filter-options">
+              {% assign property_types = 'casa,departamento,terreno,local_comercial,oficina,bodega' | split: ',' %}
+              {% for type in property_types %}
+                {% assign type_count = 0 %}
+                {% for product in collections.all.products %}
+                  {% if product.tags contains type %}
+                    {% assign type_count = type_count | plus: 1 %}
+                  {% endif %}
+                {% endfor %}
+                {% if type_count > 0 %}
+                  <label class="filter-option">
+                    <input type="checkbox" name="property_type" value="{{ type }}" data-filter-type="tag">
+                    <span class="filter-checkbox"></span>
+                    <span class="filter-label">
+                      {% case type %}
+                        {% when 'casa' %}Casas
+                        {% when 'departamento' %}Departamentos  
+                        {% when 'terreno' %}Terrenos
+                        {% when 'local_comercial' %}Locales Comerciales
+                        {% when 'oficina' %}Oficinas
+                        {% when 'bodega' %}Bodegas
+                      {% endcase %}
+                      <span class="filter-count">({{ type_count }})</span>
+                    </span>
+                  </label>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Bedrooms Filter -->
+          <div class="filter-group">
+            <h4 class="filter-title">Recámaras</h4>
+            <div class="filter-options">
+              {% assign bedroom_tags = 'recamaras-1,recamaras-2,recamaras-3,recamaras-4,recamaras-5-plus' | split: ',' %}
+              {% for bedroom_tag in bedroom_tags %}
+                {% assign bedroom_count = 0 %}
+                {% for product in collections.all.products %}
+                  {% if product.tags contains bedroom_tag %}
+                    {% assign bedroom_count = bedroom_count | plus: 1 %}
+                  {% endif %}
+                {% endfor %}
+                {% if bedroom_count > 0 %}
+                  <label class="filter-option">
+                    <input type="checkbox" name="bedrooms" value="{{ bedroom_tag }}" data-filter-type="tag">
+                    <span class="filter-checkbox"></span>
+                    <span class="filter-label">
+                      {% case bedroom_tag %}
+                        {% when 'recamaras-1' %}1 Recámara
+                        {% when 'recamaras-2' %}2 Recámaras
+                        {% when 'recamaras-3' %}3 Recámaras
+                        {% when 'recamaras-4' %}4 Recámaras
+                        {% when 'recamaras-5-plus' %}5+ Recámaras
+                      {% endcase %}
+                      <span class="filter-count">({{ bedroom_count }})</span>
+                    </span>
+                  </label>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          
+          <!-- Location Filter -->
+          <div class="filter-group">
+            <h4 class="filter-title">Ubicación</h4>
+            <div class="filter-options">
+              {% assign locations = collections.all.products | map: 'tags' | join: ',' | split: ',' | uniq %}
+              {% assign location_tags = '' %}
+              {% for tag in locations %}
+                {% if tag contains 'ubicacion-' %}
+                  {% assign location_tags = location_tags | append: tag | append: ',' %}
+                {% endif %}
+              {% endfor %}
+              {% assign location_array = location_tags | split: ',' | uniq %}
+              {% for location_tag in location_array %}
+                {% unless location_tag == blank %}
+                  {% assign location_count = 0 %}
+                  {% for product in collections.all.products %}
+                    {% if product.tags contains location_tag %}
+                      {% assign location_count = location_count | plus: 1 %}
+                    {% endif %}
+                  {% endfor %}
+                  {% if location_count > 0 %}
+                    {% assign location_name = location_tag | remove: 'ubicacion-' | replace: '-', ' ' | capitalize %}
+                    <label class="filter-option">
+                      <input type="checkbox" name="location" value="{{ location_tag }}" data-filter-type="tag">
+                      <span class="filter-checkbox"></span>
+                      <span class="filter-label">
+                        {{ location_name }}
+                        <span class="filter-count">({{ location_count }})</span>
+                      </span>
+                    </label>
+                  {% endif %}
+                {% endunless %}
+              {% endfor %}
+            </div>
+          </div>
+          
+          <!-- Price Range Filter -->
+          <div class="filter-group">
+            <h4 class="filter-title">Rango de precio</h4>
+            <div class="filter-options">
+              {% assign price_ranges = 'precio-0-500000,precio-500000-1000000,precio-1000000-2000000,precio-2000000-5000000,precio-5000000-plus' | split: ',' %}
+              {% for range in price_ranges %}
+                {% assign range_count = 0 %}
+                {% for product in collections.all.products %}
+                  {% if product.tags contains range %}
+                    {% assign range_count = range_count | plus: 1 %}
+                  {% endif %}
+                {% endfor %}
+                {% if range_count > 0 %}
+                  <label class="filter-option">
+                    <input type="checkbox" name="price_range" value="{{ range }}" data-filter-type="tag">
+                    <span class="filter-checkbox"></span>
+                    <span class="filter-label">
+                      {% case range %}
+                        {% when 'precio-0-500000' %}Hasta $500,000
+                        {% when 'precio-500000-1000000' %}$500,000 - $1,000,000
+                        {% when 'precio-1000000-2000000' %}$1,000,000 - $2,000,000
+                        {% when 'precio-2000000-5000000' %}$2,000,000 - $5,000,000
+                        {% when 'precio-5000000-plus' %}Más de $5,000,000
+                      {% endcase %}
+                      <span class="filter-count">({{ range_count }})</span>
+                    </span>
+                  </label>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Mobile Filter Toggle -->
+          <div class="mobile-filter-toggle">
+            <button type="button" class="btn btn--secondary" id="mobile-filter-toggle">
+              <svg class="filter-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 4H21V6H3V4ZM7 10H17V12H7V10ZM11 16H13V18H11V16Z" fill="currentColor"/>
+              </svg>
+              Filtros
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Properties Grid -->
+      <main class="collection-main">
+        
+        <!-- Sort Options -->
+        <div class="collection-toolbar">
+          <div class="sort-options">
+            <label for="sort-select" class="sort-label">Ordenar por:</label>
+            <select id="sort-select" class="sort-select">
+              <option value="manual">Destacados</option>
+              <option value="price-ascending">Precio: menor a mayor</option>
+              <option value="price-descending">Precio: mayor a menor</option>
+              <option value="title-ascending">Nombre: A-Z</option>
+              <option value="title-descending">Nombre: Z-A</option>
+              <option value="created-descending">Más recientes</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Properties Grid -->
+        {% if collection.products.size > 0 %}
+          <div class="properties-grid">
+            {% for product in collection.products %}
+              {% render 'property-card', product: product %}
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="collection-empty">
+            <div class="empty-state">
+              <svg class="empty-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 7H5C3.89543 7 3 7.89543 3 9V18C3 19.1046 3.89543 20 5 20H19C20.1046 20 21 19.1046 21 18V9C21 7.89543 20.1046 7 19 7Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M8.5 11C9.32843 11 10 10.3284 10 9.5C10 8.67157 9.32843 8 8.5 8C7.67157 8 7 8.67157 7 9.5C7 10.3284 7.67157 11 8.5 11Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M21 15L16 10L5 21" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              <h3 class="empty-title">No se encontraron propiedades</h3>
+              <p class="empty-description">
+                No hay propiedades disponibles en esta colección en este momento.
+              </p>
+              <a href="{{ routes.root_url }}" class="btn btn--primary">
+                Ver todas las propiedades
+              </a>
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Pagination -->
+        {% if paginate.pages > 1 %}
+          <nav class="pagination-wrapper" role="navigation" aria-label="Paginación">
+            {% paginate collection.products by 12 %}
+              <div class="pagination">
+                
+                <!-- Previous Page -->
+                {% if paginate.previous %}
+                  <a href="{{ paginate.previous.url }}" class="pagination-item pagination-prev" aria-label="Página anterior">
+                    <svg class="pagination-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Anterior
+                  </a>
+                {% else %}
+                  <span class="pagination-item pagination-prev pagination-disabled">
+                    <svg class="pagination-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Anterior
+                  </span>
+                {% endif %}
+
+                <!-- Page Numbers -->
+                <div class="pagination-numbers">
+                  {% for part in paginate.parts %}
+                    {% if part.is_link %}
+                      <a href="{{ part.url }}" class="pagination-item pagination-number" aria-label="Página {{ part.title }}">
+                        {{ part.title }}
+                      </a>
+                    {% else %}
+                      {% if part.title == paginate.current_page %}
+                        <span class="pagination-item pagination-number pagination-current" aria-current="page" aria-label="Página actual, página {{ part.title }}">
+                          {{ part.title }}
+                        </span>
+                      {% else %}
+                        <span class="pagination-item pagination-ellipsis">{{ part.title }}</span>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                </div>
+
+                <!-- Next Page -->
+                {% if paginate.next %}
+                  <a href="{{ paginate.next.url }}" class="pagination-item pagination-next" aria-label="Página siguiente">
+                    Siguiente
+                    <svg class="pagination-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                {% else %}
+                  <span class="pagination-item pagination-next pagination-disabled">
+                    Siguiente
+                    <svg class="pagination-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                {% endif %}
+
+              </div>
+
+              <!-- Pagination Info -->
+              <div class="pagination-info">
+                <p class="pagination-text">
+                  Mostrando {{ paginate.current_offset | plus: 1 }} - 
+                  {% if paginate.current_page == paginate.pages %}
+                    {{ collection.products_count }}
+                  {% else %}
+                    {{ paginate.current_offset | plus: paginate.page_size }}
+                  {% endif %}
+                  de {{ collection.products_count }} propiedades
+                </p>
+              </div>
+
+            {% endpaginate %}
+          </nav>
+        {% endif %}
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- Include WhatsApp Float -->
+{% render 'whatsapp-float' %}

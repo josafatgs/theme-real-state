@@ -1,0 +1,245 @@
+{
+  "metafields": {
+    "product": {
+      "custom.location": {
+        "namespace": "custom",
+        "key": "location",
+        "name": "Ubicación",
+        "description": "Ubicación específica de la propiedad (colonia, zona, ciudad)",
+        "type": "single_line_text_field",
+        "validation": {
+          "max_length": 100
+        }
+      },
+      "custom.bedrooms": {
+        "namespace": "custom",
+        "key": "bedrooms",
+        "name": "Recámaras",
+        "description": "Número de recámaras de la propiedad",
+        "type": "number_integer",
+        "validation": {
+          "min": 0,
+          "max": 20
+        }
+      },
+      "custom.bathrooms": {
+        "namespace": "custom",
+        "key": "bathrooms",
+        "name": "Baños",
+        "description": "Número de baños completos de la propiedad",
+        "type": "number_decimal",
+        "validation": {
+          "min": 0,
+          "max": 20
+        }
+      },
+      "custom.half_bathrooms": {
+        "namespace": "custom",
+        "key": "half_bathrooms",
+        "name": "Medios Baños",
+        "description": "Número de medios baños de la propiedad",
+        "type": "number_integer",
+        "validation": {
+          "min": 0,
+          "max": 10
+        }
+      },
+      "custom.square_meters": {
+        "namespace": "custom",
+        "key": "square_meters",
+        "name": "Metros Cuadrados",
+        "description": "Superficie total de la propiedad en metros cuadrados",
+        "type": "number_integer",
+        "validation": {
+          "min": 1,
+          "max": 10000
+        }
+      },
+      "custom.lot_size": {
+        "namespace": "custom",
+        "key": "lot_size",
+        "name": "Tamaño del Terreno",
+        "description": "Superficie del terreno en metros cuadrados",
+        "type": "number_integer",
+        "validation": {
+          "min": 0,
+          "max": 50000
+        }
+      },
+      "custom.property_type": {
+        "namespace": "custom",
+        "key": "property_type",
+        "name": "Tipo de Propiedad",
+        "description": "Categoría principal de la propiedad",
+        "type": "single_line_text_field",
+        "validation": {
+          "choices": ["casa", "departamento", "terreno", "local_comercial", "oficina", "bodega"]
+        }
+      },
+      "custom.property_status": {
+        "namespace": "custom",
+        "key": "property_status",
+        "name": "Estado de la Propiedad",
+        "description": "Estado actual de la propiedad",
+        "type": "single_line_text_field",
+        "validation": {
+          "choices": ["disponible", "vendida", "rentada", "en_proceso", "reservada"]
+        }
+      },
+      "custom.year_built": {
+        "namespace": "custom",
+        "key": "year_built",
+        "name": "Año de Construcción",
+        "description": "Año en que fue construida la propiedad",
+        "type": "number_integer",
+        "validation": {
+          "min": 1900,
+          "max": 2030
+        }
+      },
+      "custom.parking_spaces": {
+        "namespace": "custom",
+        "key": "parking_spaces",
+        "name": "Espacios de Estacionamiento",
+        "description": "Número de espacios de estacionamiento",
+        "type": "number_integer",
+        "validation": {
+          "min": 0,
+          "max": 20
+        }
+      },
+      "custom.features": {
+        "namespace": "custom",
+        "key": "features",
+        "name": "Características",
+        "description": "Lista de características especiales de la propiedad separadas por comas",
+        "type": "multi_line_text_field",
+        "validation": {
+          "max_length": 1000
+        }
+      },
+      "custom.amenities": {
+        "namespace": "custom",
+        "key": "amenities",
+        "name": "Amenidades",
+        "description": "Amenidades del desarrollo o edificio separadas por comas",
+        "type": "multi_line_text_field",
+        "validation": {
+          "max_length": 1000
+        }
+      },
+      "custom.maintenance_fee": {
+        "namespace": "custom",
+        "key": "maintenance_fee",
+        "name": "Cuota de Mantenimiento",
+        "description": "Cuota mensual de mantenimiento en pesos mexicanos",
+        "type": "money"
+      },
+      "custom.property_tax": {
+        "namespace": "custom",
+        "key": "property_tax",
+        "name": "Predial Anual",
+        "description": "Impuesto predial anual en pesos mexicanos",
+        "type": "money"
+      },
+      "custom.neighborhood": {
+        "namespace": "custom",
+        "key": "neighborhood",
+        "name": "Colonia/Fraccionamiento",
+        "description": "Nombre de la colonia o fraccionamiento",
+        "type": "single_line_text_field",
+        "validation": {
+          "max_length": 100
+        }
+      },
+      "custom.city": {
+        "namespace": "custom",
+        "key": "city",
+        "name": "Ciudad",
+        "description": "Ciudad donde se ubica la propiedad",
+        "type": "single_line_text_field",
+        "validation": {
+          "max_length": 50
+        }
+      },
+      "custom.state": {
+        "namespace": "custom",
+        "key": "state",
+        "name": "Estado",
+        "description": "Estado donde se ubica la propiedad",
+        "type": "single_line_text_field",
+        "validation": {
+          "max_length": 50
+        }
+      },
+      "custom.postal_code": {
+        "namespace": "custom",
+        "key": "postal_code",
+        "name": "Código Postal",
+        "description": "Código postal de la propiedad",
+        "type": "single_line_text_field",
+        "validation": {
+          "max_length": 10
+        }
+      },
+      "custom.latitude": {
+        "namespace": "custom",
+        "key": "latitude",
+        "name": "Latitud",
+        "description": "Coordenada de latitud para mapas",
+        "type": "number_decimal"
+      },
+      "custom.longitude": {
+        "namespace": "custom",
+        "key": "longitude",
+        "name": "Longitud",
+        "description": "Coordenada de longitud para mapas",
+        "type": "number_decimal"
+      },
+      "custom.virtual_tour_url": {
+        "namespace": "custom",
+        "key": "virtual_tour_url",
+        "name": "Tour Virtual URL",
+        "description": "Enlace al tour virtual de la propiedad",
+        "type": "url"
+      },
+      "custom.video_url": {
+        "namespace": "custom",
+        "key": "video_url",
+        "name": "Video URL",
+        "description": "Enlace al video de la propiedad (YouTube, Vimeo, etc.)",
+        "type": "url"
+      },
+      "custom.agent_name": {
+        "namespace": "custom",
+        "key": "agent_name",
+        "name": "Nombre del Agente",
+        "description": "Nombre del agente responsable de la propiedad",
+        "type": "single_line_text_field",
+        "validation": {
+          "max_length": 100
+        }
+      },
+      "custom.agent_phone": {
+        "namespace": "custom",
+        "key": "agent_phone",
+        "name": "Teléfono del Agente",
+        "description": "Número de teléfono del agente responsable",
+        "type": "single_line_text_field",
+        "validation": {
+          "max_length": 20
+        }
+      },
+      "custom.agent_email": {
+        "namespace": "custom",
+        "key": "agent_email",
+        "name": "Email del Agente",
+        "description": "Correo electrónico del agente responsable",
+        "type": "single_line_text_field",
+        "validation": {
+          "max_length": 100
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,341 @@
+{%- comment -%}
+  JSON-LD Structured Data for SEO
+  Implements schema.org markup for real estate properties and business
+{%- endcomment -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ shop.url }}#organization",
+      "name": "{{ shop.name }}",
+      "url": "{{ shop.url }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ settings.logo | image_url: width: 300 }}"
+      }
+      {%- if settings.business_phone -%}
+      ,"telephone": "{{ settings.business_phone }}"
+      {%- endif -%}
+      {%- if settings.business_email -%}
+      ,"email": "{{ settings.business_email }}"
+      {%- endif -%}
+      {%- if settings.business_address -%}
+      ,"address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{ settings.business_street_address }}",
+        "addressLocality": "{{ settings.business_city }}",
+        "addressRegion": "{{ settings.business_state }}",
+        "postalCode": "{{ settings.business_postal_code }}",
+        "addressCountry": "{{ settings.business_country }}"
+      }
+      {%- endif -%}
+      {%- if settings.social_facebook_link or settings.social_instagram_link or settings.social_twitter_link -%}
+      ,"sameAs": [
+        {%- if settings.social_facebook_link -%}"{{ settings.social_facebook_link }}"{%- endif -%}
+        {%- if settings.social_instagram_link -%}{%- if settings.social_facebook_link -%},{%- endif -%}"{{ settings.social_instagram_link }}"{%- endif -%}
+        {%- if settings.social_twitter_link -%}{%- if settings.social_facebook_link or settings.social_instagram_link -%},{%- endif -%}"{{ settings.social_twitter_link }}"{%- endif -%}
+      ]
+      {%- endif -%}
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ shop.url }}#website",
+      "url": "{{ shop.url }}",
+      "name": "{{ shop.name }}",
+      "description": "{{ shop.description | strip_html | escape }}",
+      "publisher": {
+        "@id": "{{ shop.url }}#organization"
+      },
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "{{ shop.url }}/search?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      ]
+    }
+    {%- if template == 'index' -%}
+    ,{
+      "@type": "WebPage",
+      "@id": "{{ canonical_url }}#webpage",
+      "url": "{{ canonical_url }}",
+      "name": "{{ page_title }}",
+      "isPartOf": {
+        "@id": "{{ shop.url }}#website"
+      },
+      "about": {
+        "@id": "{{ shop.url }}#organization"
+      },
+      "description": "{{ page_description | default: shop.description | strip_html | escape }}"
+    }
+    {%- endif -%}
+    
+    {%- if template contains 'product' -%}
+    ,{
+      "@type": "Product",
+      "@id": "{{ product.url | prepend: shop.url }}#product",
+      "name": "{{ product.title | escape }}",
+      "description": "{{ product.description | strip_html | escape }}",
+      "url": "{{ product.url | prepend: shop.url }}",
+      "sku": "{{ product.selected_or_first_available_variant.sku }}",
+      "brand": {
+        "@id": "{{ shop.url }}#organization"
+      },
+      "manufacturer": {
+        "@id": "{{ shop.url }}#organization"
+      }
+      {%- if product.featured_image -%}
+      ,"image": [
+        {%- for image in product.images limit: 5 -%}
+          "{{ image | image_url: width: 1200 }}"
+          {%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+      {%- endif -%}
+      ,"offers": {
+        "@type": "Offer",
+        "url": "{{ product.url | prepend: shop.url }}",
+        "priceCurrency": "{{ cart.currency.iso_code }}",
+        "price": "{{ product.price | divided_by: 100.0 }}",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@id": "{{ shop.url }}#organization"
+        }
+      }
+      {%- comment -%} Real Estate Specific Properties {%- endcomment -%}
+      {%- if product.metafields.custom.property_type -%}
+      ,"category": "{{ product.metafields.custom.property_type | capitalize }}"
+      {%- endif -%}
+      {%- if product.metafields.custom.bedrooms -%}
+      ,"numberOfRooms": "{{ product.metafields.custom.bedrooms }}"
+      {%- endif -%}
+      {%- if product.metafields.custom.square_meters -%}
+      ,"floorSize": {
+        "@type": "QuantitativeValue",
+        "value": "{{ product.metafields.custom.square_meters }}",
+        "unitCode": "MTK"
+      }
+      {%- endif -%}
+      {%- if product.metafields.custom.location -%}
+      ,"address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{ product.metafields.custom.location }}"
+        {%- if product.metafields.custom.city -%}
+        ,"addressRegion": "{{ product.metafields.custom.city }}"
+        {%- endif -%}
+        {%- if product.metafields.custom.state -%}
+        ,"addressRegion": "{{ product.metafields.custom.state }}"
+        {%- endif -%}
+        {%- if product.metafields.custom.postal_code -%}
+        ,"postalCode": "{{ product.metafields.custom.postal_code }}"
+        {%- endif -%}
+      }
+      {%- endif -%}
+    }
+    ,{
+      "@type": "RealEstateListing",
+      "@id": "{{ product.url | prepend: shop.url }}#listing",
+      "name": "{{ product.title | escape }}",
+      "description": "{{ product.description | strip_html | escape }}",
+      "url": "{{ product.url | prepend: shop.url }}",
+      "datePosted": "{{ product.created_at | date: '%Y-%m-%d' }}",
+      "validThrough": "{{ 'now' | date: '%s' | plus: 7776000 | date: '%Y-%m-%d' }}",
+      "price": {
+        "@type": "PriceSpecification",
+        "price": "{{ product.price | divided_by: 100.0 }}",
+        "priceCurrency": "{{ cart.currency.iso_code }}"
+      }
+      {%- if product.metafields.custom.property_type -%}
+      ,"additionalType": "{{ product.metafields.custom.property_type | capitalize }}"
+      {%- endif -%}
+      {%- if product.metafields.custom.bedrooms -%}
+      ,"numberOfRooms": "{{ product.metafields.custom.bedrooms }}"
+      {%- endif -%}
+      {%- if product.metafields.custom.bathrooms -%}
+      ,"numberOfBathroomsTotal": "{{ product.metafields.custom.bathrooms }}"
+      {%- endif -%}
+      {%- if product.metafields.custom.square_meters -%}
+      ,"floorSize": {
+        "@type": "QuantitativeValue",
+        "value": "{{ product.metafields.custom.square_meters }}",
+        "unitCode": "MTK"
+      }
+      {%- endif -%}
+      {%- if product.metafields.custom.lot_size -%}
+      ,"lotSize": "{{ product.metafields.custom.lot_size }} m²"
+      {%- endif -%}
+      {%- if product.metafields.custom.year_built -%}
+      ,"yearBuilt": "{{ product.metafields.custom.year_built }}"
+      {%- endif -%}
+      {%- if product.metafields.custom.location -%}
+      ,"address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{ product.metafields.custom.street_address | default: product.metafields.custom.location }}",
+        "addressLocality": "{{ product.metafields.custom.city | default: product.metafields.custom.location }}",
+        "addressRegion": "{{ product.metafields.custom.state }}",
+        "postalCode": "{{ product.metafields.custom.postal_code }}",
+        "addressCountry": "{{ settings.business_country | default: 'MX' }}"
+      }
+      {%- endif -%}
+      {%- if product.featured_image -%}
+      ,"image": [
+        {%- for image in product.images limit: 10 -%}
+          "{{ image | image_url: width: 1200 }}"
+          {%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+      {%- endif -%}
+      ,"offers": {
+        "@type": "Offer",
+        "url": "{{ product.url | prepend: shop.url }}",
+        "priceCurrency": "{{ cart.currency.iso_code }}",
+        "price": "{{ product.price | divided_by: 100.0 }}",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@id": "{{ shop.url }}#organization"
+        }
+      }
+    }
+    {%- endif -%}
+    
+    {%- if template contains 'collection' -%}
+    ,{
+      "@type": "CollectionPage",
+      "@id": "{{ collection.url | prepend: shop.url }}#collectionpage",
+      "name": "{{ collection.title | escape }}",
+      "description": "{{ collection.description | strip_html | escape }}",
+      "url": "{{ collection.url | prepend: shop.url }}",
+      "isPartOf": {
+        "@id": "{{ shop.url }}#website"
+      },
+      "about": {
+        "@id": "{{ shop.url }}#organization"
+      }
+      {%- if collection.featured_image -%}
+      ,"image": "{{ collection.featured_image | image_url: width: 1200 }}"
+      {%- endif -%}
+      ,"mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": "{{ collection.products_count }}",
+        "itemListElement": [
+          {%- for product in collection.products limit: 20 -%}
+          {
+            "@type": "ListItem",
+            "position": "{{ forloop.index }}",
+            "item": {
+              "@type": "Product",
+              "@id": "{{ product.url | prepend: shop.url }}#product",
+              "name": "{{ product.title | escape }}",
+              "url": "{{ product.url | prepend: shop.url }}",
+              "image": "{{ product.featured_image | image_url: width: 600 }}",
+              "offers": {
+                "@type": "Offer",
+                "price": "{{ product.price | divided_by: 100.0 }}",
+                "priceCurrency": "{{ cart.currency.iso_code }}",
+                "availability": "https://schema.org/InStock"
+              }
+            }
+          }
+          {%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      }
+    }
+    {%- endif -%}
+    
+    {%- comment -%} Local Business Schema for Real Estate {%- endcomment -%}
+    ,{
+      "@type": "RealEstateAgent",
+      "@id": "{{ shop.url }}#realestate",
+      "name": "{{ shop.name }}",
+      "url": "{{ shop.url }}",
+      "description": "{{ shop.description | strip_html | escape }}"
+      {%- if settings.logo -%}
+      ,"logo": "{{ settings.logo | image_url: width: 300 }}"
+      {%- endif -%}
+      {%- if settings.business_phone -%}
+      ,"telephone": "{{ settings.business_phone }}"
+      {%- endif -%}
+      {%- if settings.business_email -%}
+      ,"email": "{{ settings.business_email }}"
+      {%- endif -%}
+      {%- if settings.business_address -%}
+      ,"address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{ settings.business_street_address }}",
+        "addressLocality": "{{ settings.business_city }}",
+        "addressRegion": "{{ settings.business_state }}",
+        "postalCode": "{{ settings.business_postal_code }}",
+        "addressCountry": "{{ settings.business_country }}"
+      }
+      {%- endif -%}
+      {%- if settings.business_hours -%}
+      ,"openingHours": "{{ settings.business_hours }}"
+      {%- endif -%}
+      {%- if settings.business_coordinates -%}
+      ,"geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "{{ settings.business_coordinates | split: ',' | first | strip }}",
+        "longitude": "{{ settings.business_coordinates | split: ',' | last | strip }}"
+      }
+      {%- endif -%}
+      {%- if settings.social_facebook_link or settings.social_instagram_link or settings.social_twitter_link -%}
+      ,"sameAs": [
+        {%- if settings.social_facebook_link -%}"{{ settings.social_facebook_link }}"{%- endif -%}
+        {%- if settings.social_instagram_link -%}{%- if settings.social_facebook_link -%},{%- endif -%}"{{ settings.social_instagram_link }}"{%- endif -%}
+        {%- if settings.social_twitter_link -%}{%- if settings.social_facebook_link or settings.social_instagram_link -%},{%- endif -%}"{{ settings.social_twitter_link }}"{%- endif -%}
+      ]
+      {%- endif -%}
+      ,"areaServed": {
+        "@type": "City",
+        "name": "{{ settings.service_area | default: settings.business_city }}"
+      }
+    }
+  ]
+}
+</script>
+
+{%- comment -%} Breadcrumb Structured Data {%- endcomment -%}
+{%- if template contains 'product' or template contains 'collection' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "{{ 'general.breadcrumb.home' | t }}",
+      "item": "{{ shop.url }}"
+    }
+    {%- if template contains 'collection' -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ collection.title }}",
+      "item": "{{ collection.url | prepend: shop.url }}"
+    }
+    {%- elsif template contains 'product' -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ 'general.breadcrumb.properties' | t }}",
+      "item": "{{ collections.propiedades.url | prepend: shop.url }}"
+    }
+    ,{
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ product.title }}",
+      "item": "{{ product.url | prepend: shop.url }}"
+    }
+    {%- endif -%}
+  ]
+}
+</script>
+{%- endif -%}

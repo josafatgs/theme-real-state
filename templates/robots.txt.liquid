@@ -1,0 +1,40 @@
+{% comment %}
+  Robots.txt Template for SEO
+  Provides search engine crawling instructions
+{% endcomment %}
+User-agent: *
+Allow: /
+
+{%- comment -%} Block admin and checkout areas {%- endcomment -%}
+Disallow: /admin/
+Disallow: /cart/
+Disallow: /orders/
+Disallow: /checkouts/
+Disallow: /checkout/
+Disallow: /account/
+Disallow: /services/
+Disallow: /mini_cart/
+Disallow: /cart.js
+Disallow: /cart.json
+Disallow: /*.json$
+Disallow: /*?*sort_by*
+Disallow: /*?*page*
+Disallow: /search?*
+Disallow: /apple-app-site-association
+
+{%- comment -%} Block duplicate content {%- endcomment -%}
+Disallow: /*?*utm_*
+Disallow: /*?*ref=*
+Disallow: /*?*fbclid=*
+Disallow: /*?*gclid=*
+
+{%- comment -%} Allow important assets {%- endcomment -%}
+Allow: /assets/
+Allow: /*.css$
+Allow: /*.js$
+
+{%- comment -%} Sitemap location {%- endcomment -%}
+Sitemap: {{ shop.url }}/sitemap.xml
+
+{%- comment -%} Crawl delay for respectful crawling {%- endcomment -%}
+Crawl-delay: 1

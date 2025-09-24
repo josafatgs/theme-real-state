@@ -1,0 +1,293 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Etiquetado \"{{ tags }}\"",
+      "page": "Página {{ page }}"
+    },
+    "404": {
+      "title": "404 Página no encontrada",
+      "subtext_html": "La página que buscas no existe."
+    },
+    "accessibility": {
+      "refresh_page": "Al seleccionar una opción se actualiza toda la página.",
+      "link_messages": {
+        "new_window": "Se abre en una nueva ventana."
+      },
+      "skip_to_text": "Ir directamente al contenido"
+    },
+    "share": {
+      "success_message": "Enlace copiado al portapapeles"
+    },
+    "breadcrumb": {
+      "home": "Inicio",
+      "properties": "Propiedades"
+    },
+    "seo": {
+      "property_title_suffix": "Propiedad en venta",
+      "collection_title_suffix": "Propiedades disponibles",
+      "default_description": "Encuentra la propiedad perfecta con nuestros expertos en bienes raíces. Casas, departamentos y terrenos en las mejores ubicaciones.",
+      "property_description": "{{ title }} - {{ type }} de {{ bedrooms }} recámaras en {{ location }}. {{ price }}. Más información y fotos.",
+      "collection_description": "Explora nuestra selección de {{ collection }} disponibles. Encuentra la propiedad perfecta para ti con asesoría profesional."
+    }
+  },
+  "sections": {
+    "cart": {
+      "cart_error": "Hubo un error al actualizar el carrito. Por favor intenta de nuevo.",
+      "cart_quantity_error_html": "Solo puedes agregar [quantity] de este artículo al carrito."
+    },
+    "slideshow": {
+      "pause_slideshow": "Pausar presentación",
+      "play_slideshow": "Reproducir presentación"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Agregar al carrito",
+      "sold_out": "Agotado",
+      "unavailable": "No disponible",
+      "media": {
+        "image_available": "La imagen {{ index }} está disponible en la galería"
+      }
+    }
+  },
+  "templates": {
+    "search": {
+      "no_results": "No se encontraron resultados para \"{{ terms }}\". Revisa la ortografía o usa una palabra diferente o más general.",
+      "results_with_count": {
+        "one": "{{ count }} resultado para \"{{ terms }}\"",
+        "other": "{{ count }} resultados para \"{{ terms }}\""
+      },
+      "title": "Resultados de búsqueda",
+      "page": "Página",
+      "products": "Propiedades",
+      "search_for": "Buscar \"{{ terms }}\"",
+      "results_with_count_and_term": {
+        "one": "{{ count }} resultado encontrado para \"{{ terms }}\"",
+        "other": "{{ count }} resultados encontrados para \"{{ terms }}\""
+      }
+    },
+    "cart": {
+      "cart": "Carrito"
+    },
+    "contact": {
+      "form": {
+        "name": "Nombre",
+        "email": "Correo electrónico",
+        "phone": "Teléfono",
+        "comment": "Comentario",
+        "send": "Enviar",
+        "post_success": "Gracias por contactarnos. Te responderemos lo antes posible.",
+        "error_heading": "Por favor ajusta lo siguiente:"
+      }
+    },
+    "404": {
+      "title": "Página no encontrada",
+      "subtext": "404"
+    }
+  },
+  "localization": {
+    "country_label": "País/región",
+    "language_label": "Idioma",
+    "update_language": "Actualizar idioma",
+    "update_country": "Actualizar país/región"
+  },
+  "customer": {
+    "account": {
+      "title": "Cuenta",
+      "details": "Detalles de la cuenta",
+      "view_addresses": "Ver direcciones",
+      "return": "Regresar a detalles de la cuenta"
+    },
+    "log_in": "Iniciar sesión",
+    "log_out": "Cerrar sesión",
+    "register": "Registrarse",
+    "account_fallback": "Cuenta",
+    "cancel": "Cancelar",
+    "subscriptions": {
+      "title": "Suscripciones"
+    }
+  },
+  "homepage": {
+    "onboarding": {
+      "product_title": "Ejemplo de título de propiedad",
+      "product_description": "Esta área se usa para describir los detalles de tu propiedad. Informa a los clientes sobre el aspecto, la sensación y el estilo de tu propiedad. Agrega detalles sobre el color, los materiales utilizados, el tamaño y dónde se hizo.",
+      "collection_title": "Ejemplo de título de colección",
+      "blog_title": "Título de tu publicación",
+      "blog_excerpt": "Tu tienda aún no ha publicado ninguna entrada de blog. Un blog se puede usar para hablar sobre lanzamientos de nuevos productos, consejos u otras noticias que quieras compartir con tus clientes. Puedes consultar el blog de comercio electrónico de Shopify para obtener inspiración e ideas para tu propia tienda y blog.",
+      "blog_author": "Nombre del autor",
+      "no_content": "Esta sección actualmente no incluye ningún contenido. Agrega contenido a esta sección usando la barra lateral."
+    }
+  },
+  "benefits": {
+    "section_title": "¿Por qué elegirnos?",
+    "section_subtitle": "Descubre las ventajas de trabajar con nosotros",
+    "experience": {
+      "title": "Experiencia Comprobada",
+      "description": "Más de 10 años ayudando a familias a encontrar su hogar ideal"
+    },
+    "personalized": {
+      "title": "Asesoría Personalizada", 
+      "description": "Te acompañamos en cada paso del proceso de compra o venta"
+    },
+    "portfolio": {
+      "title": "Amplio Portafolio",
+      "description": "Contamos con una gran variedad de propiedades en las mejores ubicaciones"
+    },
+    "trust": {
+      "title": "Garantía de Confianza",
+      "description": "Procesos transparentes y seguros respaldados por nuestra reputación"
+    }
+  },
+  "lead_form": {
+    "title": "Contáctanos",
+    "subtitle": "Déjanos tus datos y te contactaremos para ayudarte a encontrar la propiedad perfecta",
+    "fields": {
+      "name": {
+        "label": "Nombre completo",
+        "placeholder": "Tu nombre completo",
+        "error": "Por favor ingresa tu nombre completo"
+      },
+      "email": {
+        "label": "Correo electrónico",
+        "placeholder": "tu@email.com",
+        "error": "Por favor ingresa un correo electrónico válido"
+      },
+      "phone": {
+        "label": "Teléfono",
+        "placeholder": "Ej: +52 123 456 7890",
+        "error": "Por favor ingresa un número de teléfono válido"
+      },
+      "property_type": {
+        "label": "Tipo de propiedad de interés",
+        "placeholder": "Selecciona una opción",
+        "error": "Por favor selecciona un tipo de propiedad",
+        "options": {
+          "casa": "Casa",
+          "departamento": "Departamento", 
+          "terreno": "Terreno",
+          "local_comercial": "Local Comercial",
+          "oficina": "Oficina"
+        }
+      },
+      "message": {
+        "label": "Mensaje adicional (opcional)",
+        "placeholder": "Cuéntanos más sobre lo que buscas..."
+      }
+    },
+    "submit": "Enviar información",
+    "submitting": "Enviando...",
+    "success": {
+      "title": "¡Mensaje enviado exitosamente!",
+      "message": "Gracias por tu interés. Nos pondremos en contacto contigo muy pronto."
+    },
+    "error": {
+      "title": "Error al enviar el mensaje",
+      "message": "Por favor, verifica los datos e intenta nuevamente.",
+      "network": "Hubo un problema al enviar tu información. Por favor intenta nuevamente o contáctanos directamente."
+    },
+    "validation": {
+      "required": "Este campo es requerido",
+      "email_invalid": "Por favor ingresa un correo electrónico válido",
+      "phone_invalid": "Por favor ingresa un número de teléfono válido"
+    }
+  },
+  "product": {
+    "details": {
+      "specifications": "Especificaciones",
+      "description": "Descripción",
+      "features": "Características",
+      "amenities": "Amenidades",
+      "bedrooms": "Recámaras",
+      "bathrooms": "Baños",
+      "area": "Área",
+      "lot_size": "Terreno",
+      "type": "Tipo",
+      "parking": "Estacionamiento",
+      "year_built": "Año de construcción",
+      "location_details": "Detalles de ubicación",
+      "neighborhood": "Colonia/Fraccionamiento",
+      "city": "Ciudad",
+      "state": "Estado",
+      "postal_code": "Código Postal",
+      "financial_info": "Información financiera",
+      "maintenance_fee": "Cuota de mantenimiento",
+      "property_tax": "Predial anual",
+      "monthly": "mensual",
+      "annually": "anual",
+      "media": "Multimedia",
+      "virtual_tour": "Tour Virtual",
+      "video": "Video de la propiedad"
+    },
+    "agent": {
+      "title": "Agente responsable"
+    },
+    "gallery": {
+      "view_full": "Ver imagen completa",
+      "view_image": "Ver imagen",
+      "image": "Imagen",
+      "no_image": "Sin imagen disponible",
+      "close": "Cerrar",
+      "previous": "Anterior",
+      "next": "Siguiente"
+    },
+    "contact": {
+      "title": "¿Interesado en esta propiedad?",
+      "subtitle": "Contáctanos para más información o para agendar una cita",
+      "schedule": "Agendar cita",
+      "whatsapp": "WhatsApp",
+      "whatsapp_message": "Hola, me interesa la propiedad:"
+    },
+    "appointment": {
+      "title": "Agendar una cita",
+      "subtitle": "Completa el formulario y nos pondremos en contacto contigo para confirmar tu cita",
+      "fields": {
+        "name": {
+          "label": "Nombre completo",
+          "error": "Por favor ingresa tu nombre completo"
+        },
+        "email": {
+          "label": "Correo electrónico",
+          "error": "Por favor ingresa un correo electrónico válido"
+        },
+        "phone": {
+          "label": "Teléfono",
+          "placeholder": "Ej: +52 123 456 7890",
+          "error": "Por favor ingresa un número de teléfono válido"
+        },
+        "date": {
+          "label": "Fecha preferida",
+          "error": "Por favor selecciona una fecha"
+        },
+        "time": {
+          "label": "Hora preferida",
+          "placeholder": "Selecciona una hora",
+          "error": "Por favor selecciona una hora"
+        },
+        "type": {
+          "label": "Tipo de cita",
+          "placeholder": "Selecciona el tipo de cita",
+          "error": "Por favor selecciona el tipo de cita",
+          "options": {
+            "visit": "Visita presencial",
+            "call": "Llamada telefónica",
+            "video": "Videollamada"
+          }
+        },
+        "message": {
+          "label": "Mensaje adicional (opcional)",
+          "placeholder": "Cuéntanos más sobre tus necesidades o preguntas específicas..."
+        }
+      },
+      "submit": "Solicitar cita",
+      "submitting": "Enviando solicitud...",
+      "success": {
+        "title": "¡Solicitud de cita enviada!",
+        "message": "Hemos recibido tu solicitud. Te contactaremos pronto para confirmar los detalles de tu cita."
+      },
+      "error": {
+        "title": "Error al enviar la solicitud",
+        "message": "Por favor, verifica los datos e intenta nuevamente."
+      }
+    }
+  }
+}

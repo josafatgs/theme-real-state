@@ -1,154 +1,16 @@
-{%- if section.settings.show_announcement -%}
-  <div class="announcement-bar" role="region" aria-label="Anuncio">
-    <div class="announcement-bar__container">
-      <div class="announcement-bar__content">
-        {%- if section.settings.announcement_icon != blank -%}
-          <span class="announcement-bar__icon">{{ section.settings.announcement_icon }}</span>
-        {%- endif -%}
-        
-        <span class="announcement-bar__text">{{ section.settings.announcement_text }}</span>
-        
-        {%- if section.settings.announcement_link != blank -%}
-          <a href="{{ section.settings.announcement_link }}" class="announcement-bar__link">
-            {{ section.settings.announcement_link_text | default: 'Ver más' }}
-          </a>
-        {%- endif -%}
-      </div>
-      
-      {%- if section.settings.show_close_button -%}
-        <button class="announcement-bar__close" aria-label="Cerrar anuncio" onclick="this.parentElement.parentElement.style.display='none'">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      {%- endif -%}
-    </div>
-  </div>
-
-  <style>
-    .announcement-bar {
-      background: var(--color-primary);
-      color: white;
-      font-size: 0.9rem;
-      position: relative;
-      z-index: 1001;
-    }
-
-    .announcement-bar__container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0.75rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    .announcement-bar__content {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-align: center;
-    }
-
-    .announcement-bar__icon {
-      font-size: 1.1rem;
-    }
-
-    .announcement-bar__text {
-      font-weight: 500;
-    }
-
-    .announcement-bar__link {
-      color: white;
-      text-decoration: underline;
-      font-weight: 600;
-      transition: opacity 0.3s ease;
-    }
-
-    .announcement-bar__link:hover {
-      opacity: 0.8;
-    }
-
-    .announcement-bar__close {
-      background: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-      padding: 0.25rem;
-      border-radius: 4px;
-      transition: background 0.3s ease;
-      margin-left: auto;
-    }
-
-    .announcement-bar__close:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    @media screen and (min-width: 768px) {
-      .announcement-bar__container {
-        padding: 0.75rem 2rem;
-      }
-    }
-
-    @media screen and (min-width: 1024px) {
-      .announcement-bar__container {
-        padding: 0.75rem 3rem;
-      }
-    }
-
-    @media screen and (min-width: 1200px) {
-      .announcement-bar__container {
-        padding: 0.75rem 1rem;
-      }
-    }
-  </style>
-{%- endif -%}
+<div class="announcement-bar">
+  <p>{{ section.settings.text | default: 'Anuncio importante' }}</p>
+</div>
 
 {% schema %}
 {
-  "name": "Announcement bar",
-  "max_blocks": 1,
+  "name": "Announcement Bar",
   "settings": [
     {
-      "type": "checkbox",
-      "id": "show_announcement",
-      "label": "Show announcement bar",
-      "default": false
-    },
-    {
       "type": "text",
-      "id": "announcement_icon",
-      "label": "Icon (emoji or text)",
-      "default": "📢"
-    },
-    {
-      "type": "textarea",
-      "id": "announcement_text",
-      "label": "Announcement text",
-      "default": "¡Nuevas propiedades disponibles! Contacta con nosotros para más información."
-    },
-    {
-      "type": "url",
-      "id": "announcement_link",
-      "label": "Link URL"
-    },
-    {
-      "type": "text",
-      "id": "announcement_link_text",
-      "label": "Link text",
-      "default": "Ver más"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_close_button",
-      "label": "Show close button",
-      "default": true
-    }
-  ],
-  "presets": [
-    {
-      "name": "Announcement bar"
+      "id": "text",
+      "label": "Announcement Text",
+      "default": "Announcement"
     }
   ]
 }

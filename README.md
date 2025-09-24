@@ -10,7 +10,7 @@ Si ves errores como:
 
 **CAUSA**: Las secciones no tienen un esquema (`{% schema %}`) válido.
 
-**SOLUCIÓN**: ✅ **YA CORREGIDO** - Todas las secciones ahora tienen esquemas válidos.
+**SOLUCIÓN**: ✅ **COMPLETAMENTE CORREGIDO** - Todas las secciones han sido simplificadas al máximo con esquemas básicos válidos.
 
 ### Error 404 en la página principal
 

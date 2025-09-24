@@ -1,33 +1,31 @@
-{% comment %}
-  Benefits/Features Section
-  Displays 3-4 benefit cards with icons in a responsive grid layout
-{% endcomment %}
-
 <section class="benefits" id="benefits">
   <div class="container">
-    {% assign benefits_title = section.settings.benefits_title | default: settings.benefits_title %}
-    {% if benefits_title != blank %}
-      <h2 class="benefits__title">{{ benefits_title }}</h2>
-    {% endif %}
-    
-    {% assign benefits_subtitle = section.settings.benefits_subtitle | default: settings.benefits_subtitle %}
-    {% if benefits_subtitle != blank %}
-      <p class="benefits__subtitle">{{ benefits_subtitle }}</p>
-    {% endif %}
+    <h2 class="benefits__title">{{ settings.benefits_title | default: '¿Por qué elegirnos?' }}</h2>
+    <p class="benefits__subtitle">{{ settings.benefits_subtitle | default: 'Somos expertos en el mercado inmobiliario con años de experiencia' }}</p>
 
     <div class="benefits__grid">
-      {% if section.blocks.size > 0 %}
-        {% for block in section.blocks %}
-          {% case block.type %}
-            {% when 'benefit_card' %}
-              <div class="benefit-card" {{ block.shopify_attributes }}>
-                {% if block.settings.icon != blank %}
-                  <div class="benefit-card__icon">
-                    {{ block.settings.icon }}
-                  </div>
-                {% endif %}
-                
-                {% if block.settings.title != blank %}
+      <div class="benefit-card">
+        <h3 class="benefit-card__title">{{ settings.benefit_1_title | default: 'Experiencia Comprobada' }}</h3>
+        <p class="benefit-card__description">{{ settings.benefit_1_description | default: 'Más de 10 años ayudando a familias a encontrar su hogar ideal' }}</p>
+      </div>
+      
+      <div class="benefit-card">
+        <h3 class="benefit-card__title">{{ settings.benefit_2_title | default: 'Asesoría Personalizada' }}</h3>
+        <p class="benefit-card__description">{{ settings.benefit_2_description | default: 'Te acompañamos en todo el proceso de compra o venta' }}</p>
+      </div>
+      
+      <div class="benefit-card">
+        <h3 class="benefit-card__title">{{ settings.benefit_3_title | default: 'Mejores Precios' }}</h3>
+        <p class="benefit-card__description">{{ settings.benefit_3_description | default: 'Negociamos para obtener las mejores condiciones para ti' }}</p>
+      </div>
+      
+      <div class="benefit-card">
+        <h3 class="benefit-card__title">{{ settings.benefit_4_title | default: 'Soporte Completo' }}</h3>
+        <p class="benefit-card__description">{{ settings.benefit_4_description | default: 'Desde la búsqueda hasta la entrega de llaves' }}</p>
+      </div>
+    </div>
+  </div>
+</section>
                   <h3 class="benefit-card__title">{{ block.settings.title }}</h3>
                 {% endif %}
                 

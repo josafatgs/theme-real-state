@@ -1,33 +1,56 @@
-{% comment %}
-  Testimonials Section
-  Displays customer reviews in a responsive card layout
-{% endcomment %}
-
 <section class="testimonials" id="testimonials">
   <div class="container">
-    {% assign testimonials_title = section.settings.testimonials_title | default: settings.testimonials_title %}
-    {% if testimonials_title != blank %}
-      <h2 class="testimonials__title">{{ testimonials_title }}</h2>
-    {% endif %}
-    
-    {% assign testimonials_subtitle = section.settings.testimonials_subtitle | default: settings.testimonials_subtitle %}
-    {% if testimonials_subtitle != blank %}
-      <p class="testimonials__subtitle">{{ testimonials_subtitle }}</p>
-    {% endif %}
+    <h2 class="testimonials__title">{{ settings.testimonials_title | default: 'Lo que dicen nuestros clientes' }}</h2>
+    <p class="testimonials__subtitle">{{ settings.testimonials_subtitle | default: 'Conoce las experiencias de quienes ya encontraron su hogar con nosotros' }}</p>
 
     <div class="testimonials__grid">
-      {% if section.blocks.size > 0 %}
-        {% for block in section.blocks %}
-          {% case block.type %}
-            {% when 'testimonial_card' %}
-              <div class="testimonial-card" {{ block.shopify_attributes }}>
-                {% if block.settings.rating and block.settings.rating > 0 %}
-                  <div class="testimonial-card__rating">
-                    {% for i in (1..5) %}
-                      {% if i <= block.settings.rating %}
-                        <span class="star star--filled">★</span>
-                      {% else %}
-                        <span class="star star--empty">☆</span>
+      <div class="testimonial-card">
+        <div class="testimonial-card__rating">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+        <p class="testimonial-card__text">{{ settings.testimonial_1_text | default: 'Excelente servicio, me ayudaron a encontrar la casa perfecta para mi familia.' }}</p>
+        <div class="testimonial-card__author">
+          <strong>{{ settings.testimonial_1_author | default: 'María González' }}</strong>
+          <span>{{ settings.testimonial_1_location | default: 'Zona Norte' }}</span>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-card__rating">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+        <p class="testimonial-card__text">{{ settings.testimonial_2_text | default: 'Vendí mi propiedad rápidamente y al mejor precio. El equipo es muy confiable.' }}</p>
+        <div class="testimonial-card__author">
+          <strong>{{ settings.testimonial_2_author | default: 'Carlos Rodríguez' }}</strong>
+          <span>{{ settings.testimonial_2_location | default: 'Centro' }}</span>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-card__rating">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+        <p class="testimonial-card__text">{{ settings.testimonial_3_text | default: 'Compramos nuestro primer departamento con su ayuda. Nos explicaron todo paso a paso.' }}</p>
+        <div class="testimonial-card__author">
+          <strong>{{ settings.testimonial_3_author | default: 'Ana y Roberto Martínez' }}</strong>
+          <span>{{ settings.testimonial_3_location | default: 'Zona Sur' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
                       {% endif %}
                     {% endfor %}
                   </div>

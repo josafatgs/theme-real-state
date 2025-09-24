@@ -1,33 +1,53 @@
-{% comment %}
-Lead Capture Form Section
-Requirements: 2.1, 2.2, 2.3, 2.4, 2.5
-{% endcomment %}
-
 <section class="lead-form" id="contact-form">
   <div class="container">
-    <div class="lead-form__header">
-      <h2 id="form-title">{{ section.settings.form_title | default: settings.lead_form_title | default: 'Contáctanos' }}</h2>
-      <p id="form-description">{{ section.settings.form_subtitle | default: settings.lead_form_subtitle | default: 'Déjanos tus datos y te contactaremos para ayudarte a encontrar la propiedad perfecta' }}</p>
-    </div>
+    <h2 class="lead-form__title">{{ settings.lead_form_title | default: '¿Buscas una propiedad?' }}</h2>
+    <p class="lead-form__subtitle">{{ settings.lead_form_subtitle | default: 'Déjanos tus datos y te contactaremos con las mejores opciones' }}</p>
 
-    <div class="lead-form__wrapper">
-      {% comment %} Success Message {% endcomment %}
-      <div class="form-message form-message--success" id="form-success" style="display: none;">
-        <div class="form-message__content">
-          <svg class="form-message__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M9 12l2 2 4-4"></path>
-            <circle cx="12" cy="12" r="10"></circle>
-          </svg>
-          <div>
-            <h3>¡Mensaje enviado exitosamente!</h3>
-            <p>{{ settings.lead_form_success_message | default: 'Gracias por tu interés. Nos pondremos en contacto contigo muy pronto.' }}</p>
-          </div>
+    <form class="contact-form" action="{{ routes.root_url }}contact#contact_form" method="post" accept-charset="UTF-8">
+      <input type="hidden" name="form_type" value="contact">
+      <input type="hidden" name="utf8" value="✓">
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contact_name">Nombre completo *</label>
+          <input type="text" id="contact_name" name="contact[name]" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="contact_email">Correo electrónico *</label>
+          <input type="email" id="contact_email" name="contact[email]" required>
         </div>
       </div>
-
-      {% comment %} Error Message {% endcomment %}
-      <div class="form-message form-message--error" id="form-error" style="display: none;">
-        <div class="form-message__content">
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contact_phone">Teléfono *</label>
+          <input type="tel" id="contact_phone" name="contact[phone]" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="contact_interest">Tipo de propiedad</label>
+          <select id="contact_interest" name="contact[interest]">
+            <option value="">Selecciona una opción</option>
+            <option value="casa">Casa</option>
+            <option value="departamento">Departamento</option>
+            <option value="terreno">Terreno</option>
+            <option value="comercial">Comercial</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="contact_message">Mensaje</label>
+        <textarea id="contact_message" name="contact[body]" rows="4" placeholder="Cuéntanos qué tipo de propiedad buscas, presupuesto, ubicación preferida, etc."></textarea>
+      </div>
+      
+      <button type="submit" class="btn btn--primary btn--large">
+        {{ settings.lead_form_button_text | default: 'Enviar información' }}
+      </button>
+    </form>
+  </div>
+</section>
           <svg class="form-message__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="15" y1="9" x2="9" y2="15"></line>

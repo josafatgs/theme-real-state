@@ -231,6 +231,8 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'section-header.css' | asset_url | stylesheet_tag }}
+    {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 
     {%- if settings.custom_css != blank -%}
       <style>
@@ -245,9 +247,7 @@
       <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
 
-    {%- if settings.predictive_search_enabled -%}
-      <link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
-    {%- endif -%}
+    {%- comment -%} Predictive search CSS removed - not implemented {%- endcomment -%}
 
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
     if (Shopify.designMode) {
@@ -307,9 +307,7 @@
       }
     </script>
 
-    {%- if settings.predictive_search_enabled -%}
-      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
+    {%- comment -%} Predictive search JS removed - not implemented {%- endcomment -%}
 
     {%- if settings.custom_js != blank -%}
       <script>
